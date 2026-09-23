@@ -1,0 +1,162 @@
+import type { PhaseOutline } from '../types';
+
+/**
+ * The full course outline from PROJECT.md, unified under one numbering scheme.
+ * A module with `lessonIds` is published; an empty list means planned. The UI shows the
+ * difference honestly instead of padding planned modules with placeholder text.
+ */
+export const CURRICULUM: PhaseOutline[] = [
+  {
+    id: 'phase-0',
+    title: 'Phase 0 — Start Here',
+    blurb: 'What a network is and how Cisco devices are operated. No prior knowledge assumed.',
+    modules: [
+      {
+        id: '0.1', title: 'Welcome to Networking', domain: 'D1',
+        lessonIds: ['what-is-a-network', 'network-devices', 'lan-vs-wan'], topics: [],
+      },
+      {
+        id: '0.2', title: 'Packet Tracer Bootcamp', domain: 'foundation', lessonIds: [],
+        topics: ['Installing Packet Tracer', 'Interface and devices', 'Cabling', 'Realtime vs Simulation mode', 'PDU tool', 'Saving .pkt files'],
+      },
+      {
+        id: '0.3', title: 'Cisco IOS Fundamentals', domain: 'foundation', lessonIds: ['ios-fundamentals'],
+        topics: ['User EXEC, privileged EXEC, config modes', 'Context-sensitive help and history', 'Saving configuration', 'First router configuration'],
+        
+      },
+    ],
+  },
+  {
+    id: 'phase-1',
+    title: 'Phase 1 — Network Fundamentals',
+    blurb: 'Models, Ethernet, addressing and subnetting. About 20% of the exam.',
+    modules: [
+      { id: '1.1', title: 'Network Components (deep dive)', domain: 'D1', lessonIds: [], topics: ['Layer 3 switching', 'NGFW and IPS placement', 'WLCs and controllers', 'PoE standards'], note: 'The essentials are introduced in “Network Devices” (Module 0.1).' },
+      { id: '1.2', title: 'Network Architectures', domain: 'D1', lessonIds: [], topics: ['Two-tier and three-tier', 'Spine-leaf', 'WAN and SOHO', 'On-premises vs cloud'] },
+      { id: '1.3', title: 'The OSI Model', domain: 'D1', lessonIds: ['osi-model'], topics: [] },
+      { id: '1.4', title: 'The TCP/IP Model, TCP and UDP', domain: 'D1', lessonIds: ['tcpip-model'], topics: [] },
+      { id: '1.5', title: 'Ethernet Fundamentals', domain: 'D1', lessonIds: ['ethernet'], topics: [] },
+      { id: '1.6', title: 'MAC Addresses', domain: 'D1', lessonIds: ['mac-addresses'], topics: [] },
+      { id: '1.7', title: 'How a Switch Learns MAC Addresses', domain: 'D1', lessonIds: ['switch-mac-learning'], topics: [] },
+      { id: '1.8', title: 'Cabling and Physical Interfaces', domain: 'D1', lessonIds: ['cabling-physical'], topics: ['Copper, fibre, SFP', 'Duplex and speed', 'Auto-negotiation', 'CRC errors and interface states'] },
+      { id: '1.9', title: 'Binary Fundamentals', domain: 'D1', lessonIds: ['binary-basics'], topics: [] },
+      { id: '1.10', title: 'IPv4 Addressing', domain: 'D1', lessonIds: ['ipv4-fundamentals'], topics: [] },
+      { id: '1.11', title: 'Subnetting From Zero', domain: 'D1', lessonIds: ['subnetting-from-zero'], topics: ['Why subnet', 'CIDR and block size', 'Why the shortcut works'], note: 'Practise now in the Subnetting trainer.' },
+      { id: '1.12', title: 'Subnetting Drills', domain: 'D1', lessonIds: [], topics: ['Unlimited generated drills'], note: 'Available now as the Subnetting trainer.' },
+      { id: '1.13', title: 'VLSM', domain: 'D1', lessonIds: ['vlsm'], topics: ['Allocating networks by host count', 'Route summarisation preview'] },
+      { id: '1.14', title: 'IPv6 Fundamentals', domain: 'D1', lessonIds: ['ipv6-fundamentals'], topics: ['128-bit notation', 'Zero compression', 'Prefix length', 'Modified EUI-64'] },
+      { id: '1.15', title: 'IPv6 Address Types', domain: 'D1', lessonIds: ['ipv6-address-types'], topics: ['Global unicast', 'Link-local', 'Unique local', 'Multicast and anycast'] },
+      { id: '1.16', title: 'IPv6 Configuration', domain: 'D1', lessonIds: [], topics: ['ipv6 unicast-routing', 'Address configuration and verification'] },
+      { id: '1.17', title: 'Virtualization and Client IP Verification', domain: 'D1', lessonIds: [], topics: ['VMs, containers, VRFs', 'ipconfig / ifconfig / ip addr on client operating systems'], note: 'Added during the audit — exam objectives 1.10 and 1.12 were not in the source outline.' },
+    ],
+  },
+  {
+    id: 'phase-2',
+    title: 'Phase 2 — Network Access',
+    blurb: 'Switching, VLANs, trunks, spanning tree, EtherChannel and wireless. About 20% of the exam.',
+    modules: [
+      { id: '2.1', title: 'Basic Switch Configuration', domain: 'D2', lessonIds: [], topics: ['Hostname, passwords, console, VTY', 'Management IP and gateway'] },
+      { id: '2.2', title: 'VLAN Fundamentals', domain: 'D2', lessonIds: ['vlans'], topics: ['Access ports', 'Broadcast domains', 'show vlan brief'] },
+      { id: '2.3', title: 'VLAN Lab', domain: 'D2', lessonIds: [], topics: ['Prove VLAN separation'] },
+      { id: '2.4', title: 'Trunking', domain: 'D2', lessonIds: ['trunking'], topics: ['802.1Q', 'Native VLAN', 'Allowed VLANs'] },
+      { id: '2.5', title: 'Inter-VLAN Routing', domain: 'D2', lessonIds: ['inter-vlan-routing'], topics: ['Router-on-a-stick', 'Layer 3 switch SVIs'] },
+      { id: '2.6', title: 'Why STP Exists', domain: 'D2', lessonIds: ['why-stp'], topics: ['Loops, broadcast storms, MAC instability'] },
+      { id: '2.7', title: 'STP Fundamentals', domain: 'D2', lessonIds: ['stp-fundamentals'], topics: ['Root bridge', 'Port roles and states', 'Path cost'] },
+      { id: '2.8', title: 'Rapid PVST+', domain: 'D2', lessonIds: ['rapid-pvst'], topics: ['Rapid convergence', 'Root primary/secondary'] },
+      { id: '2.9', title: 'STP Protection', domain: 'D2', lessonIds: ['stp-protection'], topics: ['PortFast', 'BPDU Guard and Filter', 'Root Guard', 'Loop Guard'] },
+      { id: '2.10', title: 'EtherChannel', domain: 'D2', lessonIds: [], topics: ['LACP and PAgP', 'Mismatch troubleshooting'] },
+      { id: '2.11', title: 'CDP and LLDP', domain: 'D2', lessonIds: [], topics: ['Neighbour discovery'] },
+      { id: '2.12', title: 'Wireless Fundamentals', domain: 'D2', lessonIds: [], topics: ['SSID, BSSID, channels', '2.4 vs 5 GHz'] },
+      { id: '2.13', title: 'Wireless Architectures', domain: 'D2', lessonIds: [], topics: ['Autonomous vs lightweight AP', 'CAPWAP', 'AP modes'] },
+      { id: '2.14', title: 'Wireless Security', domain: 'D2', lessonIds: [], topics: ['WPA2, WPA3', 'PSK vs enterprise', 'RADIUS'] },
+      { id: '2.15', title: 'WLC GUI Walkthrough', domain: 'D2', lessonIds: [], topics: ['WLAN creation', 'Security, VLAN mapping, QoS'] },
+    ],
+  },
+  {
+    id: 'phase-3',
+    title: 'Phase 3 — IP Connectivity',
+    blurb: 'Routing tables, static routes and single-area OSPF. The heaviest domain at about 25%.',
+    modules: [
+      { id: '3.1', title: 'What a Router Actually Does', domain: 'D3', lessonIds: [], topics: ['The eight-step forwarding process'] },
+      { id: '3.2', title: 'The Routing Table', domain: 'D3', lessonIds: [], topics: ['Route codes', 'Metric and administrative distance'] },
+      { id: '3.3', title: 'Longest Prefix Match', domain: 'D3', lessonIds: [], topics: ['Interactive route-selection exercises'] },
+      { id: '3.4', title: 'IPv4 Static Routes', domain: 'D3', lessonIds: [], topics: ['Next-hop, exit-interface, fully specified'] },
+      { id: '3.5', title: 'Default Routes', domain: 'D3', lessonIds: [], topics: ['Gateway of last resort'] },
+      { id: '3.6', title: 'Floating Static Routes', domain: 'D3', lessonIds: [], topics: ['Backup paths via administrative distance'] },
+      { id: '3.7', title: 'IPv6 Static Routing', domain: 'D3', lessonIds: [], topics: ['ipv6 route'] },
+      { id: '3.8', title: 'Dynamic Routing', domain: 'D3', lessonIds: [], topics: ['Static vs dynamic', 'Link-state vs distance-vector'] },
+      { id: '3.9', title: 'OSPF Fundamentals', domain: 'D3', lessonIds: [], topics: ['Router ID', 'Hello, LSDB, SPF, cost, areas'] },
+      { id: '3.10', title: 'Single-Area OSPF Configuration', domain: 'D3', lessonIds: [], topics: ['network statements', 'Interface-level configuration'] },
+      { id: '3.11', title: 'OSPF Neighbour Relationships', domain: 'D3', lessonIds: [], topics: ['Why adjacencies fail'] },
+      { id: '3.12', title: 'OSPF DR and BDR', domain: 'D3', lessonIds: [], topics: ['Election on broadcast networks'] },
+      { id: '3.13', title: 'First-Hop Redundancy Protocols', domain: 'D3', lessonIds: [], topics: ['HSRP/VRRP/GLBP concepts'], note: 'Added during the audit — exam objective 3.5 was not in the source outline.' },
+    ],
+  },
+  {
+    id: 'phase-4',
+    title: 'Phase 4 — IP Services',
+    blurb: 'DHCP, DNS, NAT, time, monitoring, QoS and remote access. About 10% of the exam.',
+    modules: [
+      { id: '4.1', title: 'DHCP Fundamentals', domain: 'D4', lessonIds: [], topics: ['DORA'] },
+      { id: '4.2', title: 'DHCP Server and Relay', domain: 'D4', lessonIds: [], topics: ['Pools and exclusions', 'ip helper-address'] },
+      { id: '4.3', title: 'DNS', domain: 'D4', lessonIds: [], topics: ['A and AAAA records', 'Recursive resolution'] },
+      { id: '4.4', title: 'NAT Fundamentals', domain: 'D4', lessonIds: [], topics: ['Inside/outside local and global'] },
+      { id: '4.5', title: 'Static and Dynamic NAT', domain: 'D4', lessonIds: [], topics: ['Address pools'] },
+      { id: '4.6', title: 'PAT (NAT Overload)', domain: 'D4', lessonIds: [], topics: ['Many hosts, one address'] },
+      { id: '4.7', title: 'NTP', domain: 'D4', lessonIds: [], topics: ['Client and server'] },
+      { id: '4.8', title: 'SNMP', domain: 'D4', lessonIds: [], topics: ['Manager, agent, MIB, traps'] },
+      { id: '4.9', title: 'Syslog', domain: 'D4', lessonIds: [], topics: ['Severity levels 0–7'] },
+      { id: '4.10', title: 'QoS', domain: 'D4', lessonIds: [], topics: ['Classification, marking, queuing, policing, shaping'] },
+      { id: '4.11', title: 'SSH', domain: 'D4', lessonIds: [], topics: ['Secure remote administration'] },
+      { id: '4.12', title: 'TFTP and FTP', domain: 'D4', lessonIds: [], topics: ['File transfer roles'], note: 'Added during the audit — exam objective 4.9 was not in the source outline.' },
+    ],
+  },
+  {
+    id: 'phase-5',
+    title: 'Phase 5 — Security Fundamentals',
+    blurb: 'Threats, hardening, ACLs and Layer 2 security. About 15% of the exam.',
+    modules: [
+      { id: '5.1', title: 'Security Concepts', domain: 'D5', lessonIds: [], topics: ['Threat, vulnerability, exploit, mitigation'] },
+      { id: '5.2', title: 'Common Threats', domain: 'D5', lessonIds: [], topics: ['Malware, phishing, MITM, DoS, spoofing'] },
+      { id: '5.3', title: 'Device Hardening', domain: 'D5', lessonIds: [], topics: ['Enable secret', 'Banners', 'Unused ports'] },
+      { id: '5.4', title: 'ACL Fundamentals', domain: 'D5', lessonIds: [], topics: ['Permit/deny logic', 'Wildcard masks'] },
+      { id: '5.5', title: 'Standard ACLs', domain: 'D5', lessonIds: [], topics: [] },
+      { id: '5.6', title: 'Extended and Named ACLs', domain: 'D5', lessonIds: [], topics: ['Protocol, ports, sequence'] },
+      { id: '5.7', title: 'ACL Placement', domain: 'D5', lessonIds: [], topics: ['Guidelines, not laws'] },
+      { id: '5.8', title: 'Port Security', domain: 'D5', lessonIds: [], topics: ['Sticky MACs', 'Violation modes'] },
+      { id: '5.9', title: 'DHCP Snooping', domain: 'D5', lessonIds: [], topics: ['Trusted vs untrusted ports'] },
+      { id: '5.10', title: 'Dynamic ARP Inspection', domain: 'D5', lessonIds: [], topics: ['ARP spoofing'] },
+      { id: '5.11', title: 'AAA', domain: 'D5', lessonIds: [], topics: ['RADIUS vs TACACS+'] },
+      { id: '5.12', title: 'VPN and Security Architecture', domain: 'D5', lessonIds: [], topics: ['IPsec site-to-site and remote access', 'Firewalls, IDS, IPS'] },
+      { id: '5.13', title: 'Security Programs and Password Policy', domain: 'D5', lessonIds: [], topics: ['User awareness', 'MFA, certificates, biometrics'], note: 'Added during the audit — objectives 5.2 and 5.4 were not in the source outline.' },
+    ],
+  },
+  {
+    id: 'phase-6',
+    title: 'Phase 6 — Automation and Programmability',
+    blurb: 'Controllers, APIs, data formats and configuration management. About 10% of the exam.',
+    modules: [
+      { id: '6.1', title: 'Why Network Automation', domain: 'D6', lessonIds: [], topics: ['3 vs 3,000 switches'] },
+      { id: '6.2', title: 'Controller-Based Networking', domain: 'D6', lessonIds: [], topics: ['Control, data and management planes', 'Northbound and southbound APIs'] },
+      { id: '6.3', title: 'SDN', domain: 'D6', lessonIds: [], topics: ['Underlay, overlay, fabric'] },
+      { id: '6.4', title: 'REST APIs', domain: 'D6', lessonIds: [], topics: ['HTTP verbs, CRUD, authentication'] },
+      { id: '6.5', title: 'HTTP Status Codes', domain: 'D6', lessonIds: [], topics: ['200, 201, 204, 400, 401, 403, 404, 500'] },
+      { id: '6.6', title: 'JSON and XML', domain: 'D6', lessonIds: [], topics: ['Objects, arrays, keys, values'] },
+      { id: '6.7', title: 'Ansible and Terraform', domain: 'D6', lessonIds: [], topics: ['Agentless automation', 'Infrastructure as code'] },
+      { id: '6.8', title: 'AI and ML in Network Operations', domain: 'D6', lessonIds: [], topics: ['Predictive vs generative AI', 'Limits and verification'] },
+    ],
+  },
+  {
+    id: 'phase-7',
+    title: 'Phases 7–9 — Troubleshooting, Labs and Exam Practice',
+    blurb: 'Method-driven troubleshooting, the lab track, timed practice exams and the final review.',
+    modules: [
+      { id: '7.1', title: 'Troubleshooting Method and Toolbox', domain: 'practice', lessonIds: [], topics: ['Eight-step method', 'Every show command: normal vs broken output'] },
+      { id: '7.2', title: 'Troubleshooting Scenarios', domain: 'practice', lessonIds: [], topics: ['Gateway unreachable', 'VLANs cannot talk', 'OSPF neighbour missing', 'DHCP failing'] },
+      { id: '8.1', title: 'Hands-On Lab Track and Capstone', domain: 'practice', lessonIds: [], topics: ['Six lab levels', 'Pacific Tech Solutions capstone'] },
+      { id: '9.1', title: 'Exam Simulator and 7-Day Review', domain: 'practice', lessonIds: [], topics: ['Timed exams', 'Domain analytics', 'Weak-topic exams', 'Exam-day checklist'] },
+    ],
+  },
+];
+
+export const allModules = () => CURRICULUM.flatMap((p) => p.modules);
