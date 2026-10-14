@@ -23,6 +23,10 @@ import * as whyStp from './lessons/why-stp';
 import * as stpFundamentals from './lessons/stp-fundamentals';
 import * as rapidPvst from './lessons/rapid-pvst';
 import * as stpProtection from './lessons/stp-protection';
+import * as etherchannel from './lessons/etherchannel';
+import * as cdpLldp from './lessons/cdp-lldp';
+import * as dhcpFundamentals from './lessons/dhcp-fundamentals';
+import * as dhcpServerRelay from './lessons/dhcp-server-relay';
 
 interface LessonBundle {
   lesson: Lesson;
@@ -35,6 +39,7 @@ const BUNDLES: LessonBundle[] = [
   whatIsANetwork, networkDevices, lanVsWan, osiModel, tcpipModel, ethernet, macAddresses, switchMacLearning, binaryBasics, ipv4Fundamentals,
   iosFundamentals, cablingPhysical, subnettingFromZero, vlsm, ipv6Fundamentals, ipv6AddressTypes,
   vlans, trunking, interVlanRouting, whyStp, stpFundamentals, rapidPvst, stpProtection,
+  etherchannel, cdpLldp, dhcpFundamentals, dhcpServerRelay,
 ];
 
 const byId = new Map(BUNDLES.map((b) => [b.lesson.id, b.lesson]));

@@ -15,9 +15,9 @@ describe('domainProgress', () => {
     expect(d1.published).toBe(d1Lessons);
     expect(d1.completed).toBe(1);
     expect(d1.percent).toBe(Math.round((1 / d1Lessons) * 100));
-    // D2 has lessons now but none completed: a real 0%, not null. Unpublished domains stay null.
+    // D2 has lessons now but none completed: a real 0%, not null. D4 is published now; unpublished domains stay null.
     expect(rows.find((r) => r.domain.id === 'D2')!.percent).toBe(0);
-    for (const id of ['D3', 'D4', 'D5', 'D6']) expect(rows.find((r) => r.domain.id === id)!.percent).toBeNull();
+    for (const id of ['D3', 'D5', 'D6']) expect(rows.find((r) => r.domain.id === id)!.percent).toBeNull();
   });
 });
 

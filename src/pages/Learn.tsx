@@ -1,13 +1,18 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { CURRICULUM } from '../data/curriculum';
-import { LESSONS, lessonById } from '../data';
+import { DOMAINS } from '../data/domains';
+import { LESSONS, lessonById, moduleOfLesson } from '../data';
 import { PageHead, ProgressBar } from '../components/common/Common';
 import { useAppState } from '../store/store';
+import { recommendedLesson } from '../store/derived';
 
 export default function Learn() {
   const state = useAppState();
   const [showPlanned, setShowPlanned] = useState(true);
+  const [domain, setDomain] = useState<string>('all');
+  const next = recommendedLesson(state, LESSONS);
+  const completedCount = LESSONS.filter((l) => state.completedLessons[l.id]).length;
   const modules = CURRICULUM.flatMap((p) => p.modules);
   const publishedModules = modules.filter((m) => m.lessonIds.length > 0).length;
 
@@ -16,6 +21,26 @@ export default function Learn() {
       <PageHead title="Course" eyebrow="Learn">
         The full CCNA path, in order. Published modules are ready to study; planned modules are on the roadmap and show what they will cover — nothing is padded with filler.
       </PageHead>
+      <section className="card continue-card" aria-label="Continue learning">
+        {next ? (
+          <>
+            <div>
+              <span className="eyebrow">{completedCount === 0 ? 'Start here' : 'Up next'}{moduleOfLesson(next.id) ? ` · Module ${moduleOfLesson(next.id)!.id}` : ''}</span>
+              <h3 style={{ margin: '2px 0 4px' }}>{next.title}</h3>
+              <p className="muted small" style={{ margin: 0 }}>{next.estimatedMinutes} min · {next.difficulty} · {completedCount} of {LESSONS.length} lessons completed</p>
+            </div>
+            <Link className="btn btn-primary" to={`/learn/${next.id}`}>{completedCount === 0 ? 'Start lesson' : 'Continue'} →</Link>
+          </>
+        ) : (
+          <p style={{ margin: 0 }}><strong>All {LESSONS.length} published lessons are complete.</strong> Review with flashcards and practice exams while new modules are added.</p>
+        )}
+      </section>
+      <div className="chip-row" role="group" aria-label="Filter by exam domain">
+        <button type="button" className="chip" aria-pressed={domain === 'all'} onClick={() => setDomain('all')}>All domains</button>
+        {DOMAINS.map((d) => (
+          <button key={d.id} type="button" className="chip" aria-pressed={domain === d.id} onClick={() => setDomain(d.id)}>{d.number} {d.name}</button>
+        ))}
+      </div>
       <div className="row row-between" style={{ marginBottom: 18 }}>
         <span className="badge badge-primary">{LESSONS.length} lessons published · {publishedModules} of {modules.length} modules</span>
         <label className="row" style={{ fontWeight: 500 }}>
@@ -24,7 +49,7 @@ export default function Learn() {
       </div>
       <div className="stack">
         {CURRICULUM.map((phase) => {
-          const visible = phase.modules.filter((m) => showPlanned || m.lessonIds.length > 0);
+          const visible = phase.modules.filter((m) => (showPlanned || m.lessonIds.length > 0) && (domain === 'all' || m.domain === domain));
           if (visible.length === 0) return null;
           return (
             <section key={phase.id} aria-labelledby={`${phase.id}-h`}>

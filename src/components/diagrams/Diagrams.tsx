@@ -708,6 +708,85 @@ function StpGuards() {
   );
 }
 
+function EtherChannelBundle() {
+  return (
+    <Svg viewBox="0 0 720 260" title="Four links bundled into one Port-channel" desc="Two switches are joined by four physical links, Gi0/1 to Gi0/4. Spanning tree would block three of them. With EtherChannel they form Port-channel 1, which spanning tree sees as a single link, and traffic is shared across all four.">
+      <text className="d-sub" x={16} y={22}>Walang EtherChannel: STP blocks ang 3 sa 4 na link</text>
+      <Node x={40} y={40} w={110} h={44} label="SW1" kind="mid" />
+      <Node x={250} y={40} w={110} h={44} label="SW2" kind="mid" />
+      <Link x1={150} y1={50} x2={250} y2={50} />
+      <Link x1={150} y1={58} x2={250} y2={58} dashed />
+      <Link x1={150} y1={66} x2={250} y2={66} dashed />
+      <Link x1={150} y1={74} x2={250} y2={74} dashed />
+      <text className="d-sub" x={380} y={66}>1 ang gumagana, 3 ang naka-block</text>
+      <text className="d-sub" x={16} y={134}>May EtherChannel (LACP): isang Port-channel1</text>
+      <Node x={40} y={152} w={110} h={44} label="SW1" kind="mid" />
+      <Node x={250} y={152} w={110} h={44} label="SW2" kind="mid" />
+      <Link x1={150} y1={162} x2={250} y2={162} />
+      <Link x1={150} y1={170} x2={250} y2={170} />
+      <Link x1={150} y1={178} x2={250} y2={178} />
+      <Link x1={150} y1={186} x2={250} y2={186} />
+      <Badge cx={200} cy={216} label="Po1" kind="ok" />
+      <text className="d-sub" x={380} y={166}>Isang link ang nakikita ng STP</text>
+      <text className="d-sub" x={380} y={186}>Lahat ng 4 ay gumagana (load balancing)</text>
+      <text className="d-sub" x={226} y={246}>LACP: active/passive · PAgP: desirable/auto</text>
+    </Svg>
+  );
+}
+
+function DiscoveryNeighbors() {
+  return (
+    <Svg viewBox="0 0 720 250" title="CDP and LLDP only see directly connected neighbours" desc="SW1 is connected to SW2 and to router R1. A PC sits behind SW2. SW1 learns about SW2 and R1 through CDP or LLDP but cannot see the PC because it is two hops away.">
+      <Node x={280} y={20} w={150} h={50} label="SW1" sub="tinitingnan natin" kind="warn" />
+      <Node x={60} y={130} w={150} h={50} label="SW2" kind="mid" />
+      <Node x={500} y={130} w={150} h={50} label="R1" kind="mid" />
+      <Link x1={320} y1={70} x2={160} y2={130} />
+      <Link x1={400} y1={70} x2={560} y2={130} />
+      <Badge cx={240} cy={100} label="1 hop" kind="ok" />
+      <Badge cx={480} cy={100} label="1 hop" kind="ok" />
+      <Node x={80} y={200} w={110} h={40} label="PC" sub="2 hops: hindi nakikita" kind="danger" />
+      <Link x1={135} y1={180} x2={135} y2={200} dashed />
+    </Svg>
+  );
+}
+
+function DhcpDora() {
+  return (
+    <Svg viewBox="0 0 720 300" title="The DHCP DORA exchange" desc="The client broadcasts a Discover. The server replies with an Offer. The client broadcasts a Request for that offer. The server confirms with an Acknowledge and the client keeps the address for the lease time.">
+      <Node x={40} y={16} w={140} h={44} label="Client" sub="walang IP pa" kind="end" />
+      <Node x={540} y={16} w={140} h={44} label="DHCP server" kind="mid" />
+      <line className="d-line-dash" x1={110} y1={60} x2={110} y2={290} />
+      <line className="d-line-dash" x1={610} y1={60} x2={610} y2={290} />
+      <Link x1={110} y1={95} x2={610} y2={95} />
+      <text className="d-text" x={360} y={86} textAnchor="middle">1  Discover (broadcast)</text>
+      <Link x1={610} y1={140} x2={110} y2={140} />
+      <text className="d-text" x={360} y={131} textAnchor="middle">2  Offer (address, mask, gateway, DNS)</text>
+      <Link x1={110} y1={185} x2={610} y2={185} />
+      <text className="d-text" x={360} y={176} textAnchor="middle">3  Request (broadcast)</text>
+      <Link x1={610} y1={230} x2={110} y2={230} />
+      <text className="d-text" x={360} y={221} textAnchor="middle">4  Acknowledge (lease confirmed)</text>
+      <text className="d-sub" x={360} y={272} textAnchor="middle">UDP: server 67, client 68</text>
+    </Svg>
+  );
+}
+
+function DhcpRelay() {
+  return (
+    <Svg viewBox="0 0 720 240" title="DHCP relay with ip helper-address" desc="A PC broadcasts a DHCP Discover on its subnet. The router interface facing the PC is configured with ip helper-address and forwards it as a unicast to a DHCP server on a different subnet.">
+      <Node x={20} y={90} w={120} h={50} label="PC" sub="Discover broadcast" kind="end" />
+      <Node x={270} y={90} w={150} h={50} label="Router" sub="ip helper-address" kind="warn" />
+      <Node x={560} y={90} w={140} h={50} label="DHCP server" sub="10.0.0.5" kind="mid" />
+      <Link x1={140} y1={115} x2={270} y2={115} />
+      <Link x1={420} y1={115} x2={560} y2={115} />
+      <text className="d-sub" x={205} y={104} textAnchor="middle">broadcast</text>
+      <text className="d-sub" x={490} y={104} textAnchor="middle">unicast</text>
+      <Badge cx={205} cy={160} label="Gi0/0" kind="ok" />
+      <text className="d-sub" x={205} y={190} textAnchor="middle">helper dito (client side)</text>
+      <text className="d-sub" x={360} y={224} textAnchor="middle">Hindi pinapasa ng router ang broadcast kung walang relay</text>
+    </Svg>
+  );
+}
+
 const DIAGRAMS: Record<DiagramId, () => ReactNode> = {
   'ios-modes': IosModes,
   'media-compare': MediaCompare,
@@ -730,6 +809,10 @@ const DIAGRAMS: Record<DiagramId, () => ReactNode> = {
   'stp-roles': StpRoles,
   'rstp-convergence': RstpConvergence,
   'stp-guards': StpGuards,
+  'etherchannel-bundle': EtherChannelBundle,
+  'discovery-neighbors': DiscoveryNeighbors,
+  'dhcp-dora': DhcpDora,
+  'dhcp-relay': DhcpRelay,
 };
 
 export function DiagramView({ id, caption }: { id: DiagramId; caption: string }) {

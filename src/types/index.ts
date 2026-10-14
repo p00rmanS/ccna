@@ -31,7 +31,11 @@ export type DiagramId =
   | 'loop-storm'
   | 'stp-roles'
   | 'rstp-convergence'
-  | 'stp-guards';
+  | 'stp-guards'
+  | 'etherchannel-bundle'
+  | 'discovery-neighbors'
+  | 'dhcp-dora'
+  | 'dhcp-relay';
 
 export type InteractiveId =
   | 'guess-device'

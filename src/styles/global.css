@@ -528,3 +528,10 @@ a.card:hover, .module:not([data-status='planned']):hover { border-color: var(--b
 /* Long addresses in inline code (IPv6, MACs) must be able to wrap on phones */
 :not(pre) > code { overflow-wrap: anywhere; }
 .explain-table td:first-child { white-space: normal; overflow-wrap: anywhere; }
+
+/* Course page: continue card and domain filter chips */
+.continue-card { display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; margin-bottom: 16px; border-left: 5px solid var(--primary); }
+.chip-row { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 16px; }
+.chip { min-height: 36px; padding: 4px 14px; border-radius: 999px; border: 1px solid var(--border); background: var(--surface); color: var(--text-muted, var(--text)); font: inherit; font-size: 0.9rem; font-weight: 600; cursor: pointer; }
+.chip:hover { background: var(--surface-2); color: var(--text); }
+.chip[aria-pressed='true'] { background: var(--primary); border-color: var(--primary); color: var(--on-primary); }
