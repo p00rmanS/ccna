@@ -35,7 +35,11 @@ export type DiagramId =
   | 'etherchannel-bundle'
   | 'discovery-neighbors'
   | 'dhcp-dora'
-  | 'dhcp-relay';
+  | 'dhcp-relay'
+  | 'dns-resolution'
+  | 'nat-terms'
+  | 'nat-static-dynamic'
+  | 'pat-ports';
 
 export type InteractiveId =
   | 'guess-device'

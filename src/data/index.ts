@@ -27,6 +27,10 @@ import * as etherchannel from './lessons/etherchannel';
 import * as cdpLldp from './lessons/cdp-lldp';
 import * as dhcpFundamentals from './lessons/dhcp-fundamentals';
 import * as dhcpServerRelay from './lessons/dhcp-server-relay';
+import * as dns from './lessons/dns';
+import * as natFundamentals from './lessons/nat-fundamentals';
+import * as natStaticDynamic from './lessons/nat-static-dynamic';
+import * as patOverload from './lessons/pat-overload';
 
 interface LessonBundle {
   lesson: Lesson;
@@ -40,6 +44,7 @@ const BUNDLES: LessonBundle[] = [
   iosFundamentals, cablingPhysical, subnettingFromZero, vlsm, ipv6Fundamentals, ipv6AddressTypes,
   vlans, trunking, interVlanRouting, whyStp, stpFundamentals, rapidPvst, stpProtection,
   etherchannel, cdpLldp, dhcpFundamentals, dhcpServerRelay,
+  dns, natFundamentals, natStaticDynamic, patOverload,
 ];
 
 const byId = new Map(BUNDLES.map((b) => [b.lesson.id, b.lesson]));

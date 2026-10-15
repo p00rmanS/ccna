@@ -787,6 +787,85 @@ function DhcpRelay() {
   );
 }
 
+function DnsResolution() {
+  return (
+    <Svg viewBox="0 0 720 280" title="Recursive DNS resolution" desc="A client asks its resolver for www.example.com. The resolver asks a root server, which points to the .com TLD server, which points to the authoritative server for example.com. The authoritative server returns the address and the resolver replies to the client and caches the answer.">
+      <Node x={20} y={110} w={110} h={50} label="Client" sub="www.example.com?" kind="end" />
+      <Node x={230} y={110} w={130} h={50} label="Resolver" sub="recursive + cache" kind="warn" />
+      <Node x={470} y={10} w={200} h={44} label="Root server" sub="'tanungin ang .com'" kind="mid" />
+      <Node x={470} y={118} w={200} h={44} label="TLD (.com) server" sub="'tanungin ang example.com'" kind="mid" />
+      <Node x={470} y={226} w={200} h={44} label="Authoritative server" sub="A: 93.184.216.34" kind="ok" />
+      <Link x1={130} y1={135} x2={230} y2={135} />
+      <Link x1={360} y1={122} x2={470} y2={32} />
+      <Link x1={360} y1={135} x2={470} y2={140} />
+      <Link x1={360} y1={148} x2={470} y2={248} />
+      <text className="d-sub" x={180} y={124} textAnchor="middle">1</text>
+      <text className="d-sub" x={420} y={66} textAnchor="middle">2</text>
+      <text className="d-sub" x={420} y={132} textAnchor="middle">3</text>
+      <text className="d-sub" x={420} y={218} textAnchor="middle">4</text>
+      <text className="d-sub" x={180} y={176} textAnchor="middle">5: sagot + cache</text>
+    </Svg>
+  );
+}
+
+function NatTerms() {
+  return (
+    <Svg viewBox="0 0 720 270" title="The four NAT address terms" desc="An inside PC has the inside local address 192.168.1.10. The NAT router translates it to the inside global address 203.0.113.5. The outside server has the outside global address 198.51.100.7, which the inside sees as the outside local address, normally the same value.">
+      <rect className="d-box-mid" x={20} y={30} width={260} height={210} rx={14} opacity={0.35} />
+      <text className="d-sub" x={32} y={52}>INSIDE (loob)</text>
+      <rect className="d-box-end" x={440} y={30} width={260} height={210} rx={14} opacity={0.35} />
+      <text className="d-sub" x={452} y={52}>OUTSIDE (labas)</text>
+      <Node x={40} y={90} w={130} h={50} label="PC1" sub="inside local" kind="end" />
+      <Node x={40} y={170} w={230} h={44} label="192.168.1.10" sub="private, paningin ng loob" kind="default" />
+      <Node x={300} y={90} w={110} h={50} label="NAT" sub="router" kind="warn" />
+      <Link x1={170} y1={115} x2={300} y2={115} />
+      <Link x1={410} y1={115} x2={470} y2={115} />
+      <Node x={470} y={90} w={210} h={50} label="203.0.113.5" sub="inside global" kind="ok" />
+      <Node x={470} y={170} w={210} h={50} label="198.51.100.7" sub="outside global / local" kind="mid" />
+    </Svg>
+  );
+}
+
+function NatStaticDynamic() {
+  return (
+    <Svg viewBox="0 0 720 280" title="Static versus dynamic NAT" desc="Static NAT maps server 192.168.1.50 permanently to 203.0.113.9. Dynamic NAT hands out addresses from a three-address pool to PC1, PC2 and PC3, while PC4 has no address left and cannot be translated.">
+      <text className="d-sub" x={16} y={22}>Static: permanente</text>
+      <Node x={30} y={34} w={150} h={44} label="192.168.1.50" sub="server" kind="end" />
+      <Link x1={180} y1={56} x2={480} y2={56} />
+      <Node x={480} y={34} w={170} h={44} label="203.0.113.9" sub="laging pareho" kind="ok" />
+      <text className="d-sub" x={16} y={118}>Dynamic: pool na 3 address</text>
+      <Node x={30} y={130} w={110} h={34} label="PC1" kind="end" />
+      <Node x={30} y={172} w={110} h={34} label="PC2" kind="end" />
+      <Node x={30} y={214} w={110} h={34} label="PC3" kind="end" />
+      <Node x={30} y={256} w={110} h={22} label="PC4" kind="danger" />
+      <Link x1={140} y1={147} x2={480} y2={147} />
+      <Link x1={140} y1={189} x2={480} y2={189} />
+      <Link x1={140} y1={231} x2={480} y2={231} />
+      <Node x={480} y={130} w={170} h={34} label="203.0.113.10" kind="ok" />
+      <Node x={480} y={172} w={170} h={34} label="203.0.113.11" kind="ok" />
+      <Node x={480} y={214} w={170} h={34} label="203.0.113.12" kind="ok" />
+      <text className="d-sub" x={160} y={271}>PC4: ubos na ang pool, hindi makalabas</text>
+    </Svg>
+  );
+}
+
+function PatPorts() {
+  return (
+    <Svg viewBox="0 0 720 240" title="PAT shares one address using ports" desc="PC1 at 192.168.1.10 and PC2 at 192.168.1.11 both leave through the router as 203.0.113.5, but with different source ports, 51000 and 51001, so replies return to the right host.">
+      <Node x={20} y={40} w={170} h={50} label="PC1 192.168.1.10" sub="port 51000" kind="end" />
+      <Node x={20} y={140} w={170} h={50} label="PC2 192.168.1.11" sub="port 51000" kind="end" />
+      <Node x={300} y={90} w={120} h={60} label="Router" sub="PAT overload" kind="warn" />
+      <Link x1={190} y1={65} x2={300} y2={110} />
+      <Link x1={190} y1={165} x2={300} y2={130} />
+      <Node x={520} y={40} w={180} h={50} label="203.0.113.5:51000" sub="para sa PC1" kind="ok" />
+      <Node x={520} y={140} w={180} h={50} label="203.0.113.5:51001" sub="para sa PC2" kind="ok" />
+      <Link x1={420} y1={110} x2={520} y2={65} />
+      <Link x1={420} y1={130} x2={520} y2={165} />
+      <text className="d-sub" x={360} y={225} textAnchor="middle">Iisang address, magkaibang port</text>
+    </Svg>
+  );
+}
+
 const DIAGRAMS: Record<DiagramId, () => ReactNode> = {
   'ios-modes': IosModes,
   'media-compare': MediaCompare,
@@ -813,6 +892,10 @@ const DIAGRAMS: Record<DiagramId, () => ReactNode> = {
   'discovery-neighbors': DiscoveryNeighbors,
   'dhcp-dora': DhcpDora,
   'dhcp-relay': DhcpRelay,
+  'dns-resolution': DnsResolution,
+  'nat-terms': NatTerms,
+  'nat-static-dynamic': NatStaticDynamic,
+  'pat-ports': PatPorts,
 };
 
 export function DiagramView({ id, caption }: { id: DiagramId; caption: string }) {

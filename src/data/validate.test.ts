@@ -10,13 +10,14 @@ describe('content integrity', () => {
     expect(problems).toEqual([]);
   });
 
-  it('publishes the twenty-seven lessons in curriculum order', () => {
+  it('publishes the thirty-one lessons in curriculum order', () => {
     expect(LESSONS.map((l) => l.id)).toEqual([
       'what-is-a-network', 'network-devices', 'lan-vs-wan', 'ios-fundamentals', 'osi-model', 'tcpip-model',
       'ethernet', 'mac-addresses', 'switch-mac-learning', 'cabling-physical', 'binary-basics', 'ipv4-fundamentals',
       'subnetting-from-zero', 'vlsm', 'ipv6-fundamentals', 'ipv6-address-types',
       'vlans', 'trunking', 'inter-vlan-routing', 'why-stp', 'stp-fundamentals', 'rapid-pvst', 'stp-protection',
       'etherchannel', 'cdp-lldp', 'dhcp-fundamentals', 'dhcp-server-relay',
+      'dns', 'nat-fundamentals', 'nat-static-dynamic', 'pat-overload',
     ]);
   });
 
