@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import { labForLesson, lessonById, moduleOfLesson, nextLesson, previousLesson, questionsForLesson, flashcardsForLesson } from '../data';
 import { objectiveLabel } from '../data/domains';
 import { SectionView } from '../components/lessons/SectionView';
@@ -26,13 +26,33 @@ export default function LessonPage() {
     return () => { window.removeEventListener('scroll', onScroll); window.removeEventListener('resize', onScroll); };
   }, [lessonId]);
 
+  // Left/right arrow keys move to the previous/next lesson (ignored while typing or with modifier keys).
+  const navigate = useNavigate();
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key !== 'ArrowLeft' && e.key !== 'ArrowRight') return;
+      if (e.ctrlKey || e.metaKey || e.altKey || e.shiftKey || e.defaultPrevented) return;
+      const t = e.target as HTMLElement | null;
+      if (t && (t.tagName === 'INPUT' || t.tagName === 'TEXTAREA' || t.tagName === 'SELECT' || t.isContentEditable)) return;
+      const target = e.key === 'ArrowRight' ? nextLesson(lessonId) : previousLesson(lessonId);
+      if (target) navigate(`/learn/${target.id}`);
+    };
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, [lessonId, navigate]);
+
   useEffect(() => {
     document.title = lesson ? `${lesson.title} · CCNA Mastery` : 'Lesson not found · CCNA Mastery';
     window.scrollTo({ top: 0 });
   }, [lesson]);
 
   if (!lesson) {
-    return <EmptyState title="Lesson not found" action={<Link className="btn btn-primary" to="/learn">Back to the course</Link>}>That lesson does not exist yet. The course page lists what is published and what is planned.</EmptyState>;
+    return (
+      <>
+        <h1 className="sr-only">Lesson not found</h1>
+        <EmptyState title="Lesson not found" action={<Link className="btn btn-primary" to="/learn">Back to the course</Link>}>That lesson does not exist yet. The course page lists what is published and what is planned.</EmptyState>
+      </>
+    );
   }
   const module = moduleOfLesson(lesson.id);
   const next = nextLesson(lesson.id);
@@ -102,10 +122,11 @@ export default function LessonPage() {
         </section>
 
         <div className="row row-between" style={{ marginTop: 32, paddingTop: 20, borderTop: '1px solid var(--border)' }}>
-          {prev ? <Link className="btn" to={`/learn/${prev.id}`}>← {prev.title}</Link> : <span />}
+          {prev ? <Link className="btn" to={`/learn/${prev.id}`} title="Previous lesson (← key)" aria-keyshortcuts="ArrowLeft">← {prev.title}</Link> : <span />}
           <button type="button" className={`btn ${done ? '' : 'btn-primary'}`} onClick={() => dispatch({ type: done ? 'uncompleteLesson' : 'completeLesson', id: lesson.id })}>{done ? '✓ Completed' : 'Mark complete'}</button>
-          {next ? <Link className="btn btn-primary" to={`/learn/${next.id}`}>Next: {next.title} →</Link> : <Link className="btn" to="/learn">Back to course</Link>}
+          {next ? <Link className="btn btn-primary" to={`/learn/${next.id}`} title="Next lesson (→ key)" aria-keyshortcuts="ArrowRight">Next: {next.title} →</Link> : <Link className="btn" to="/learn">Back to course</Link>}
         </div>
+        <p className="small muted" style={{ textAlign: 'center', marginTop: 12 }}>Tip: press <kbd>←</kbd> or <kbd>→</kbd> to move between lessons.</p>
       </article>
       <LessonTools lesson={lesson} />
     </div>
