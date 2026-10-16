@@ -76,12 +76,12 @@ export default function Dashboard() {
   const labsDone = Object.keys(state.completedLabs).length;
   const nextCli = CLI_TASKS.find((t) => !state.cliTasks[t.id]);
   const today: Array<{ key: string; to: string; icon: string; title: string; detail: string }> = [];
-  if (due > 0) today.push({ key: 'cards', to: '/flashcards', icon: '🃏', title: `Review ${due} flashcard${due === 1 ? '' : 's'}`, detail: 'spaced repetition works best when you show up on time' });
-  if (next) today.push({ key: 'lesson', to: `/learn/${next.id}`, icon: '📚', title: `${started ? 'Continue' : 'Start'}: ${next.title}`, detail: `about ${next.estimatedMinutes} minutes` });
-  if (weak[0]) today.push({ key: 'weak', to: `/learn/${weak[0].lessonId}`, icon: '🎯', title: `Revisit ${lessonById(weak[0].lessonId)?.title}`, detail: `you are at ${Math.round(weak[0].accuracy * 100)}% on it` });
-  if (nextCli) today.push({ key: 'cli', to: '/cli', icon: '⌨️', title: `CLI practice: ${nextCli.title}`, detail: 'type real IOS commands' });
-  today.push({ key: 'subnet', to: '/subnetting', icon: '🧮', title: '10-minute subnetting drill', detail: 'speed comes from repetition' });
-  if (state.quizAttempts.length >= 3 && state.examHistory.length === 0) today.push({ key: 'exam', to: '/exams', icon: '⏱️', title: 'Try a 20-question practice exam', detail: 'find your gaps under time pressure' });
+  if (due > 0) today.push({ key: 'cards', to: '/flashcards', icon: 'SRS', title: `Review ${due} flashcard${due === 1 ? '' : 's'}`, detail: 'spaced repetition works best when you show up on time' });
+  if (next) today.push({ key: 'lesson', to: `/learn/${next.id}`, icon: 'LRN', title: `${started ? 'Continue' : 'Start'}: ${next.title}`, detail: `about ${next.estimatedMinutes} minutes` });
+  if (weak[0]) today.push({ key: 'weak', to: `/learn/${weak[0].lessonId}`, icon: 'FIX', title: `Revisit ${lessonById(weak[0].lessonId)?.title}`, detail: `you are at ${Math.round(weak[0].accuracy * 100)}% on it` });
+  if (nextCli) today.push({ key: 'cli', to: '/cli', icon: 'CLI', title: `CLI practice: ${nextCli.title}`, detail: 'type real IOS commands' });
+  today.push({ key: 'subnet', to: '/subnetting', icon: 'SUB', title: '10-minute subnetting drill', detail: 'speed comes from repetition' });
+  if (state.quizAttempts.length >= 3 && state.examHistory.length === 0) today.push({ key: 'exam', to: '/exams', icon: 'EXM', title: 'Try a 20-question practice exam', detail: 'find your gaps under time pressure' });
 
   return (
     <div className="stack">

@@ -15,7 +15,7 @@ const TABS: Array<{ key: 'simple' | 'taglish' | 'technical'; label: string; styl
 function Hook({ section }: { section: Extract<Section, { type: 'hook' }> }) {
   return (
     <section className="hook" aria-labelledby="hook-h">
-      <div className="hook-eyebrow" id="hook-h"><span aria-hidden="true">💡</span> Pro tip — madaling tandaan</div>
+      <div className="hook-eyebrow" id="hook-h">Pro tip — madaling tandaan</div>
       <h2>{section.title}</h2>
       <p className="hook-trick"><Rich text={section.trick} /></p>
       {section.taglish.map((p, i) => <p key={i}><Rich text={p} /></p>)}
@@ -32,7 +32,7 @@ function AnalogyView({ section }: { section: Extract<Section, { type: 'analogy' 
   const body = settings.style === 'taglish' && section.taglish ? section.taglish : section.body;
   return (
     <section className="lesson-block">
-      <h2><span aria-hidden="true">🏘️</span> Analogy: {section.title}</h2>
+      <h2>Analogy: {section.title}</h2>
       {body.map((p, i) => <p key={i}><Rich text={p} /></p>)}
       {settings.style === 'taglish' && section.taglish && <p className="small muted">Ipinapakita sa Taglish. Palitan ang explanation style sa itaas ng lesson para sa English version.</p>}
     </section>
@@ -146,14 +146,14 @@ export function SectionView({ section }: { section: Section }) {
     case 'list':
       return (
         <section className="lesson-block">
-          <h2>{section.variant === 'mistakes' ? <span aria-hidden="true">❌ </span> : section.variant === 'tips' ? <span aria-hidden="true">🎯 </span> : null}{section.title}</h2>
+          <h2>{section.title}</h2>
           <ul>{section.items.map((it, i) => <li key={i}><Rich text={it} /></li>)}</ul>
         </section>
       );
     case 'troubleshoot':
       return (
         <section className="lesson-block card">
-          <h2><span aria-hidden="true">🔧</span> {section.title}</h2>
+          <h2>{section.title}</h2>
           <p><Rich text={section.scenario} /></p>
           {section.evidence && <CodeBlock title="Evidence" code={section.evidence} />}
           <p><strong><Rich text={section.question} /></strong></p>
@@ -166,7 +166,7 @@ export function SectionView({ section }: { section: Section }) {
     case 'challenge':
       return (
         <section className="lesson-block card">
-          <h2><span aria-hidden="true">🧩</span> {section.title}</h2>
+          <h2>{section.title}</h2>
           <p><Rich text={section.prompt} /></p>
           <Reveal label="Check my answer"><Rich text={section.answer} /></Reveal>
         </section>

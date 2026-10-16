@@ -2,10 +2,10 @@ import { useState, type ReactNode } from 'react';
 import type { CalloutKind } from '../../types';
 
 const CALLOUT_TITLES: Record<CalloutKind, { icon: string; title: string }> = {
-  trap: { icon: '⚠️', title: 'CCNA exam trap' },
-  tip: { icon: '💡', title: 'Pro tip' },
-  memorize: { icon: '📌', title: 'Memorize this' },
-  relax: { icon: '☕', title: 'Don’t memorize this yet' },
+  trap: { icon: '!', title: 'CCNA exam trap' },
+  tip: { icon: '+', title: 'Pro tip' },
+  memorize: { icon: '#', title: 'Memorize this' },
+  relax: { icon: '~', title: 'Don’t memorize this yet' },
 };
 
 export function Callout({ kind, children }: { kind: CalloutKind; children: ReactNode }) {
@@ -13,7 +13,7 @@ export function Callout({ kind, children }: { kind: CalloutKind; children: React
   return (
     <aside className={`callout callout-${kind}`}>
       <div className="callout-title">
-        <span aria-hidden="true">{t.icon}</span> {t.title}
+        <span className="callout-tag" aria-hidden="true"><span>{t.icon}</span></span>{t.title}
       </div>
       <p>{children}</p>
     </aside>

@@ -6,17 +6,17 @@ import { clearLoadWarning, dispatch, getLoadWarning, isPersistent, useAppState }
 import type { ThemeSetting } from '../../store/state';
 
 const NAV: Array<{ to: string; label: string; icon: string; end?: boolean }> = [
-  { to: '/', label: 'Dashboard', icon: '🏠', end: true },
-  { to: '/learn', label: 'Learn', icon: '📚' },
-  { to: '/labs', label: 'Labs', icon: '🧪' },
-  { to: '/cli', label: 'CLI practice', icon: '⌨️' },
-  { to: '/subnetting', label: 'Subnetting', icon: '🧮' },
-  { to: '/flashcards', label: 'Flashcards', icon: '🃏' },
-  { to: '/quizzes', label: 'Quizzes', icon: '📝' },
-  { to: '/exams', label: 'Practice exams', icon: '⏱️' },
-  { to: '/commands', label: 'Commands', icon: '📖' },
-  { to: '/notes', label: 'Notes', icon: '🗒️' },
-  { to: '/progress', label: 'Progress', icon: '📈' },
+  { to: '/', label: 'Dashboard', icon: '00', end: true },
+  { to: '/learn', label: 'Learn', icon: '01' },
+  { to: '/labs', label: 'Labs', icon: '02' },
+  { to: '/cli', label: 'CLI practice', icon: '03' },
+  { to: '/subnetting', label: 'Subnetting', icon: '04' },
+  { to: '/flashcards', label: 'Flashcards', icon: '05' },
+  { to: '/quizzes', label: 'Quizzes', icon: '06' },
+  { to: '/exams', label: 'Practice exams', icon: '07' },
+  { to: '/commands', label: 'Commands', icon: '08' },
+  { to: '/notes', label: 'Notes', icon: '09' },
+  { to: '/progress', label: 'Progress', icon: '10' },
 ];
 
 function applyTheme(theme: ThemeSetting) {
@@ -93,9 +93,9 @@ export default function Shell() {
       <aside id="sidebar" className="sidebar" data-open={open} aria-label="Sidebar">
         <Link to="/" className="brand" aria-label="CCNA Mastery home">
           <span className="brand-mark" aria-hidden="true">
-            <svg width="20" height="20" viewBox="0 0 32 32"><path d="M6 22l6-12 5 8 4-6 5 10" stroke="#fff" strokeWidth="3" fill="none" strokeLinecap="round" strokeLinejoin="round" /></svg>
+            {">_"}
           </span>
-          <span className="brand-name">CCNA Mastery<span className="brand-sub">Independent study platform</span></span>
+          <span className="brand-name">CCNA Mastery<span className="brand-sub">Field notebook</span></span>
         </Link>
         <form role="search" onSubmit={goSearch} className="side-search">
           <label htmlFor="global-search" className="sr-only">Search the course</label>
@@ -104,7 +104,7 @@ export default function Shell() {
         <nav className="nav" aria-label="Main">
           {NAV.map((n) => (
             <NavLink key={n.to} to={n.to} end={n.end}>
-              <span><span className="nav-icon" aria-hidden="true">{n.icon}</span>{n.label}</span>
+              <span><span className="nav-index" aria-hidden="true">{n.icon}</span>{n.label}</span>
               {n.to === '/flashcards' && due > 0 && <span className="nav-count" aria-label={`${due} cards due`}>{due}</span>}
             </NavLink>
           ))}
