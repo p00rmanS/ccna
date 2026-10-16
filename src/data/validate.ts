@@ -54,6 +54,9 @@ export function validateContent({ lessons, questions, flashcards, labs }: Conten
     for (const s of l.sections) {
       if (s.type === 'explain' && (!s.simple.length || !s.taglish.length || !s.technical.length)) problems.push(`${where}: explain section missing a style`);
       if (s.type === 'cli' && s.explain.length === 0) problems.push(`${where}: cli "${s.title}" has no explanations`);
+      if (s.type === 'terms') for (const t of s.items) if (!t.taglish?.trim()) problems.push(`${where}: term "${t.term}" has no Taglish`);
+      if (s.type === 'cli') for (const e of s.explain) if (!e.taglish?.trim()) problems.push(`${where}: cli line "${e.line}" has no Taglish`);
+      if (s.type === 'verify') for (const e of s.items) if (!e.taglish?.trim()) problems.push(`${where}: verify row "${e.command}" has no Taglish`);
     }
     if (questions.filter((q) => q.lessonIds.includes(l.id)).length < 5) problems.push(`${where}: fewer than 5 quiz questions`);
     if (flashcards.filter((f) => f.lessonId === l.id).length < 5) problems.push(`${where}: fewer than 5 flashcards`);
@@ -74,6 +77,7 @@ export function validateContent({ lessons, questions, flashcards, labs }: Conten
     if (q.type === 'true-false' && (q.choices.join('|') !== 'True|False' || q.correct.length !== 1)) problems.push(`${where}: malformed true/false`);
     if (!q.explanation.trim()) problems.push(`${where}: missing explanation`);
     if (!OBJECTIVES[q.objective]) problems.push(`${where}: unknown objective ${q.objective}`);
+    if (!q.explanationTl?.trim()) problems.push(`${where}: explanation has no Taglish`);
     if (q.lessonIds.length === 0) problems.push(`${where}: no related lesson`);
     for (const id of q.lessonIds) if (!lessonIds.has(id)) problems.push(`${where}: unknown lesson ${id}`);
     for (const [k, text] of Object.entries(q.wrong ?? {})) {

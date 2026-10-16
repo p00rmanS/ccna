@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { FLASHCARDS, LABS, LESSONS, QUESTIONS, nextLesson, previousLesson } from './index';
+import { TAGLISH_PROBLEMS } from './taglish';
 import { validateContent } from './validate';
 import { CURRICULUM } from './curriculum';
 import { DOMAINS } from './domains';
@@ -8,6 +9,10 @@ describe('content integrity', () => {
   it('has no structural problems', () => {
     const problems = validateContent({ lessons: LESSONS, questions: QUESTIONS, flashcards: FLASHCARDS, labs: LABS });
     expect(problems).toEqual([]);
+  });
+
+  it('has a Taglish translation for every term, CLI line, verify row and quiz explanation', () => {
+    expect(TAGLISH_PROBLEMS).toEqual([]);
   });
 
   it('publishes the thirty-one lessons in curriculum order', () => {

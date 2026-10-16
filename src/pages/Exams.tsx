@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import type { Question } from '../types';
 import { LESSONS, QUESTIONS, lessonById } from '../data';
 import { DOMAINS, objectiveLabel } from '../data/domains';
-import { EmptyState, PageHead } from '../components/common/Common';
+import { EmptyState, Explanation, PageHead } from '../components/common/Common';
 import { missedQuestionIds, topicAccuracy, weakTopics } from '../store/state';
 import { dispatch, useAppState } from '../store/store';
 import { MIN_QUESTIONS_FOR_ESTIMATE, SECONDS_PER_QUESTION, domainBreakdown, examSeconds, formatDuration, lessonBreakdown, readiness, selectExamQuestions } from '../utils/exam';
@@ -195,7 +195,7 @@ function Results({ f, onNew }: { f: Finished; onNew: () => void }) {
               <p><strong>{q.prompt}</strong></p>
               <p className="small">Your answer: {mine.length ? mine.map((c) => q.choices[c]).join(' · ') : <em>no answer</em>}</p>
               <p className="small">Correct: {q.correct.map((c) => q.choices[c]).join(' · ')}</p>
-              <p className="small">{q.explanation}</p>
+              <p className="small"><Explanation q={q} /></p>
               {mine.filter((c) => q.wrong?.[c]).map((c) => <p key={c} className="small muted">Why “{q.choices[c]}” is wrong: {q.wrong![c]}</p>)}
               <p className="small muted" style={{ margin: 0 }}>{objectiveLabel(q.objective)} · Review: {q.lessonIds.map((id, k) => <span key={id}>{k > 0 && ', '}<Link to={`/learn/${id}`}>{lessonById(id)?.title}</Link></span>)}</p>
             </div>

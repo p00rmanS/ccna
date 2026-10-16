@@ -1,5 +1,6 @@
 import { useState, type ReactNode } from 'react';
 import type { CalloutKind } from '../../types';
+import { useAppState } from '../../store/store';
 
 const CALLOUT_TITLES: Record<CalloutKind, { icon: string; title: string }> = {
   trap: { icon: '!', title: 'CCNA exam trap' },
@@ -43,6 +44,18 @@ export function CodeBlock({ title, code, copyText }: { title?: string; code: str
         <code>{code}</code>
       </pre>
     </figure>
+  );
+}
+
+/** Question explanation: Taglish first (when the learner uses Taglish), English kept underneath for exam wording. */
+export function Explanation({ q, className }: { q: { explanation: string; explanationTl?: string }; className?: string }) {
+  const taglish = useAppState().settings.style === 'taglish' && q.explanationTl;
+  if (!taglish) return <span className={className}>{q.explanation}</span>;
+  return (
+    <span className={className}>
+      {q.explanationTl}
+      <span className="small muted" style={{ display: 'block', marginTop: 4 }}>EN: {q.explanation}</span>
+    </span>
   );
 }
 

@@ -58,6 +58,8 @@ export type InteractiveId =
 export interface Term {
   term: string;
   definition: string;
+  /** Taglish version, attached from data/taglish at load time. */
+  taglish?: string;
 }
 
 export type CalloutKind = 'trap' | 'tip' | 'memorize' | 'relax';
@@ -71,8 +73,8 @@ export type Section =
   | { type: 'interactive'; id: InteractiveId; caption?: string }
   | { type: 'terms'; items: Term[] }
   | { type: 'flow'; title: string; steps: string[] }
-  | { type: 'cli'; title: string; transcript: string; copyable?: string; explain: Array<{ line: string; why: string }>; note?: string }
-  | { type: 'verify'; title: string; items: Array<{ command: string; shows: string }>; good?: string; bad?: string }
+  | { type: 'cli'; title: string; transcript: string; copyable?: string; explain: Array<{ line: string; why: string; taglish?: string }>; note?: string }
+  | { type: 'verify'; title: string; items: Array<{ command: string; shows: string; taglish?: string }>; good?: string; bad?: string }
   | { type: 'callout'; kind: CalloutKind; text: string }
   | { type: 'list'; title: string; items: string[]; variant?: 'mistakes' | 'tips' | 'remember' }
   | { type: 'troubleshoot'; title: string; scenario: string; evidence?: string; question: string; answer: string; fix?: string }
@@ -109,6 +111,8 @@ export interface Question {
   /** Indexes into `choices`. */
   correct: number[];
   explanation: string;
+  /** Taglish explanation, attached from data/taglish at load time. */
+  explanationTl?: string;
   /** Why a specific wrong choice is wrong, keyed by choice index. */
   wrong?: Record<number, string>;
 }

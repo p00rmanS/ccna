@@ -5,7 +5,7 @@ import { lessonById } from '../../data';
 import { objectiveLabel } from '../../data/domains';
 import { PASS_MARK, choiceOrder, isCorrect, scoreQuiz } from '../../utils/quiz';
 import { dispatch } from '../../store/store';
-import { ProgressBar } from '../common/Common';
+import { Explanation, ProgressBar } from '../common/Common';
 
 interface Props {
   quizId: string;
@@ -56,7 +56,7 @@ export function QuizRunner({ quizId, title, questions, onExit, onRetry }: Props)
               <div key={m.id} className="callout" style={{ marginTop: 12 }}>
                 <p><strong>{m.prompt}</strong></p>
                 <p>Correct: {m.correct.map((c) => m.choices[c]).join(' · ')}</p>
-                <p className="small">{m.explanation}</p>
+                <p className="small"><Explanation q={m} /></p>
                 <p className="small muted" style={{ margin: 0 }}>{objectiveLabel(m.objective)} · Review: {m.lessonIds.map((id) => <Link key={id} to={`/learn/${id}`}>{lessonById(id)?.title}</Link>).reduce<React.ReactNode[]>((acc, el, i) => (i ? [...acc, ', ', el] : [el]), [])}</p>
               </div>
             ))}
@@ -129,7 +129,7 @@ export function QuizRunner({ quizId, title, questions, onExit, onRetry }: Props)
           {isChecked && (
             <div className={`feedback ${correct ? 'feedback-ok' : 'feedback-bad'}`}>
               <strong>{correct ? 'Correct!' : 'Not quite.'}</strong>
-              {q!.explanation}
+              <Explanation q={q!} />
               <div className="small muted" style={{ marginTop: 6 }}>Related lesson: {q!.lessonIds.map((id) => <Link key={id} to={`/learn/${id}`}>{lessonById(id)?.title}</Link>)}</div>
             </div>
           )}

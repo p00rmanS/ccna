@@ -69,6 +69,10 @@ function Explain({ section }: { section: Extract<Section, { type: 'explain' }> }
   );
 }
 
+function useTaglish(): boolean {
+  return useAppState().settings.style === 'taglish';
+}
+
 function Reveal({ label, children }: { label: string; children: React.ReactNode }) {
   const [open, setOpen] = useState(false);
   return (
@@ -80,6 +84,7 @@ function Reveal({ label, children }: { label: string; children: React.ReactNode 
 }
 
 export function SectionView({ section }: { section: Section }) {
+  const tl = useTaglish();
   switch (section.type) {
     case 'explain':
       return <Explain section={section} />;
@@ -99,7 +104,7 @@ export function SectionView({ section }: { section: Section }) {
             {section.items.map((t) => (
               <div className="term" key={t.term}>
                 <dt>{t.term}</dt>
-                <dd><Rich text={t.definition} /></dd>
+                <dd><Rich text={tl && t.taglish ? t.taglish : t.definition} /></dd>
               </div>
             ))}
           </dl>
@@ -121,7 +126,7 @@ export function SectionView({ section }: { section: Section }) {
             <table className="table explain-table">
               <caption className="sr-only">Line-by-line explanation</caption>
               <thead><tr><th>Line</th><th>What it does</th></tr></thead>
-              <tbody>{section.explain.map((e) => <tr key={e.line}><td>{e.line}</td><td>{e.why}</td></tr>)}</tbody>
+              <tbody>{section.explain.map((e) => <tr key={e.line}><td>{e.line}</td><td>{tl && e.taglish ? e.taglish : e.why}</td></tr>)}</tbody>
             </table>
           </div>
           {section.note && <p className="small muted" style={{ marginTop: 8 }}>{section.note}</p>}
@@ -134,7 +139,7 @@ export function SectionView({ section }: { section: Section }) {
           <div className="table-wrap">
             <table className="table explain-table">
               <thead><tr><th>Command</th><th>What it shows</th></tr></thead>
-              <tbody>{section.items.map((e) => <tr key={e.command}><td>{e.command}</td><td>{e.shows}</td></tr>)}</tbody>
+              <tbody>{section.items.map((e) => <tr key={e.command}><td>{e.command}</td><td>{tl && e.taglish ? e.taglish : e.shows}</td></tr>)}</tbody>
             </table>
           </div>
           {section.good && <p><span className="badge badge-success">Healthy</span> {section.good}</p>}
