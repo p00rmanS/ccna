@@ -1,17 +1,19 @@
 import { useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { labById, lessonById } from '../data';
-import { CodeBlock, EmptyState, ProgressBar } from '../components/common/Common';
+import { CodeBlock, EmptyState, ProgressBar, useTaglish } from '../components/common/Common';
 import { dispatch, useAppState } from '../store/store';
 
 export default function LabPage() {
   const { labId = '' } = useParams();
   const lab = labById(labId);
   const state = useAppState();
+  const tl = useTaglish();
   const [hints, setHints] = useState(0);
   const [solution, setSolution] = useState<'hidden' | 'confirm' | 'shown'>('hidden');
 
   if (!lab) return <EmptyState title="Lab not found" action={<Link className="btn btn-primary" to="/labs">All labs</Link>} />;
+  const L = tl && lab.tl ? lab.tl : lab;
   const checks = state.labChecks[lab.id] ?? [];
   const complete = Boolean(state.completedLabs[lab.id]);
   const lesson = lessonById(lab.lessonId);
@@ -29,7 +31,7 @@ export default function LabPage() {
           {complete && <span className="badge badge-success">✓ Completed</span>}
           {lesson && <Link className="small" to={`/learn/${lesson.id}`}>From lesson: {lesson.title}</Link>}
         </div>
-        <p style={{ marginTop: 10 }}><strong>Objective.</strong> {lab.objective}</p>
+        <p style={{ marginTop: 10 }}><strong>Objective.</strong> {L.objective}</p>
       </header>
 
       <div className="grid grid-2">
@@ -49,7 +51,7 @@ export default function LabPage() {
           <h2 id="check-h">Validation checklist</h2>
           <ProgressBar value={(checks.length / lab.checklist.length) * 100} label="Checklist progress" tone={checks.length === lab.checklist.length ? 'success' : undefined} />
           <ul style={{ listStyle: 'none', padding: 0, marginTop: 12 }}>
-            {lab.checklist.map((c, i) => (
+            {L.checklist.map((c, i) => (
               <li key={c}>
                 <label className="row" style={{ fontWeight: 500, alignItems: 'flex-start', flexWrap: 'nowrap' }}>
                   <input type="checkbox" checked={checks.includes(i)} onChange={() => dispatch({ type: 'toggleLabCheck', labId: lab.id, index: i })} />
@@ -63,13 +65,13 @@ export default function LabPage() {
 
       <section className="card" aria-labelledby="steps-h">
         <h2 id="steps-h">Step-by-step instructions</h2>
-        <ol className="steps">{lab.steps.map((s, i) => <li key={i}>{s}</li>)}</ol>
+        <ol className="steps">{L.steps.map((s, i) => <li key={i}>{s}</li>)}</ol>
       </section>
 
       <section className="card" aria-labelledby="hints-h">
         <h2 id="hints-h">Stuck? Ask for help in stages</h2>
         <p className="muted small">Try for a few minutes first. Hints come before the solution on purpose.</p>
-        {lab.hints.slice(0, hints).map((h, i) => <div className="callout callout-tip" key={i}><div className="callout-title">Hint {i + 1}</div><p>{h}</p></div>)}
+        {L.hints.slice(0, hints).map((h, i) => <div className="callout callout-tip" key={i}><div className="callout-title">Hint {i + 1}</div><p>{h}</p></div>)}
         {hints < lab.hints.length && <button type="button" className="btn btn-sm" onClick={() => setHints(hints + 1)}>Show hint {hints + 1} of {lab.hints.length}</button>}
         <div style={{ marginTop: 14 }}>
           {solution === 'hidden' && <button type="button" className="btn btn-sm" onClick={() => setSolution('confirm')}>Show solution…</button>}
@@ -86,7 +88,7 @@ export default function LabPage() {
           {solution === 'shown' && (
             <div className="feedback feedback-ok">
               <strong>Solution</strong>
-              <ul style={{ marginBottom: 0 }}>{lab.solution.map((s, i) => <li key={i}>{s}</li>)}</ul>
+              <ul style={{ marginBottom: 0 }}>{L.solution.map((s, i) => <li key={i}>{s}</li>)}</ul>
               <button type="button" className="btn btn-sm btn-ghost" onClick={() => setSolution('hidden')}>Hide</button>
             </div>
           )}
@@ -96,7 +98,7 @@ export default function LabPage() {
       {lab.breakIt && (
         <section className="callout callout-trap">
           <div className="callout-title">Now break it, then fix it</div>
-          <p>{lab.breakIt}</p>
+          <p>{L.breakIt}</p>
         </section>
       )}
 

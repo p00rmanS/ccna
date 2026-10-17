@@ -117,6 +117,8 @@ export interface Question {
   explanation: string;
   /** Taglish explanation, attached from data/taglish at load time. */
   explanationTl?: string;
+  /** Taglish versions of the per-choice wrong-answer notes. */
+  wrongTl?: Record<number, string>;
   /** Why a specific wrong choice is wrong, keyed by choice index. */
   wrong?: Record<number, string>;
 }
@@ -128,6 +130,8 @@ export interface Flashcard {
   category: 'definition' | 'command' | 'port' | 'protocol' | 'ipv4' | 'switching' | 'concept';
   front: string;
   back: string;
+  /** Taglish answer, attached from data/taglish at load time. */
+  backTl?: string;
 }
 
 export interface Lab {
@@ -144,6 +148,17 @@ export interface Lab {
   hints: string[];
   solution: string[];
   /** After the lab: how to break it on purpose and practise fixing it (PROJECT.md §101). */
+  breakIt?: string;
+  /** Taglish version of the text fields, attached from data/taglish at load time. */
+  tl?: LabTaglish;
+}
+
+export interface LabTaglish {
+  objective: string;
+  steps: string[];
+  checklist: string[];
+  hints: string[];
+  solution: string[];
   breakIt?: string;
 }
 

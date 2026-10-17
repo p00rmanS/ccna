@@ -47,6 +47,11 @@ export function CodeBlock({ title, code, copyText }: { title?: string; code: str
   );
 }
 
+/** True when the learner studies in Taglish. */
+export function useTaglish(): boolean {
+  return useAppState().settings.style === 'taglish';
+}
+
 /** Question explanation: Taglish first (when the learner uses Taglish), English kept underneath for exam wording. */
 export function Explanation({ q, className }: { q: { explanation: string; explanationTl?: string }; className?: string }) {
   const taglish = useAppState().settings.style === 'taglish' && q.explanationTl;

@@ -54,7 +54,8 @@ const BUNDLES: LessonBundle[] = [
 ];
 
 const ALL_QUESTIONS = BUNDLES.flatMap((b) => b.questions);
-for (const b of BUNDLES) applyTaglish(b.lesson, ALL_QUESTIONS);
+const ALL_CARDS = BUNDLES.flatMap((b) => b.flashcards);
+for (const b of BUNDLES) applyTaglish(b.lesson, ALL_QUESTIONS, ALL_CARDS, b.lab);
 
 const byId = new Map(BUNDLES.map((b) => [b.lesson.id, b.lesson]));
 

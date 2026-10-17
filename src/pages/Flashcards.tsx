@@ -26,6 +26,7 @@ interface Session {
 
 export default function Flashcards() {
   const state = useAppState();
+  const tl = state.settings.style === 'taglish';
   const [params] = useSearchParams();
   const [lessonId, setLessonId] = useState(params.get('lesson') ?? 'all');
   const [source, setSource] = useState<Source>('schedule');
@@ -89,7 +90,7 @@ export default function Flashcards() {
         <button type="button" className="flash" data-side={flipped ? 'back' : 'front'} onClick={() => setFlipped(!flipped)} aria-label={flipped ? 'Answer shown. Activate to see the question again' : 'Question. Activate to reveal the answer'}>
           <span>
             <small>{flipped ? 'Answer' : 'Question'} · {lesson?.title}</small>
-            {flipped ? card.back : card.front}
+            {flipped ? (tl && card.backTl ? card.backTl : card.back) : card.front}
           </span>
         </button>
         {!flipped ? (

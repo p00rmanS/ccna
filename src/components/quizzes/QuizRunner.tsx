@@ -5,7 +5,7 @@ import { lessonById } from '../../data';
 import { objectiveLabel } from '../../data/domains';
 import { PASS_MARK, choiceOrder, isCorrect, scoreQuiz } from '../../utils/quiz';
 import { dispatch } from '../../store/store';
-import { Explanation, ProgressBar } from '../common/Common';
+import { Explanation, ProgressBar, useTaglish } from '../common/Common';
 
 interface Props {
   quizId: string;
@@ -16,6 +16,7 @@ interface Props {
 }
 
 export function QuizRunner({ quizId, title, questions, onExit, onRetry }: Props) {
+  const tl = useTaglish();
   const orders = useMemo(() => questions.map((q) => choiceOrder(q)), [questions]);
   const [index, setIndex] = useState(0);
   const [answers, setAnswers] = useState<Record<string, number[]>>({});
@@ -109,7 +110,7 @@ export function QuizRunner({ quizId, title, questions, onExit, onRetry }: Props)
           <p className="small muted">{multi ? `Choose ${needed}. There is no partial credit.` : q!.type === 'true-false' ? 'Choose true or false.' : 'Choose one answer.'}</p>
           {order.map((choice) => {
             const st = stateOf(choice);
-            const wrongNote = isChecked && !q!.correct.includes(choice) ? q!.wrong?.[choice] : undefined;
+            const wrongNote = isChecked && !q!.correct.includes(choice) ? (tl && q!.wrongTl?.[choice]) || q!.wrong?.[choice] : undefined;
             const id = `${q!.id}-c${choice}`;
             return (
               <label key={choice} className="choice" data-state={st} htmlFor={id}>
