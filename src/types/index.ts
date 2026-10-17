@@ -50,7 +50,12 @@ export type DiagramId =
   | 'hardening-layers'
   | 'acl-flow'
   | 'acl-placement'
-  | 'acl-extended-read';
+  | 'acl-extended-read'
+  | 'port-security-modes'
+  | 'dhcp-snooping-ports'
+  | 'dai-check'
+  | 'aaa-radius-tacacs'
+  | 'vpn-site-remote';
 
 export type InteractiveId =
   | 'guess-device'

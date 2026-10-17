@@ -1074,6 +1074,99 @@ function AclExtendedRead() {
   );
 }
 
+function PortSecurityModes() {
+  return (
+    <Svg viewBox="0 0 720 260" title="Port security violation modes" desc="A second MAC address appears on a port with a maximum of one. Protect drops the frame silently. Restrict drops it, logs it and counts it. Shutdown puts the port into err-disabled.">
+      <Node x={20} y={100} w={130} h={56} label="Intruder" sub="2nd MAC" kind="danger" />
+      <Node x={230} y={100} w={160} h={56} label="Switch port" sub="max 1 secure MAC" kind="mid" />
+      <Link x1={150} y1={128} x2={230} y2={128} />
+      <Node x={470} y={14} w={230} h={60} label="Protect" sub="drop lang, walang log" kind="warn" />
+      <Node x={470} y={98} w={230} h={60} label="Restrict" sub="drop + log + counter" kind="warn" />
+      <Node x={470} y={182} w={230} h={60} label="Shutdown (default)" sub="err-disabled ang port" kind="danger" />
+      <Link x1={390} y1={118} x2={470} y2={44} />
+      <Link x1={390} y1={128} x2={470} y2={128} />
+      <Link x1={390} y1={138} x2={470} y2={212} />
+      <text className="d-sub" x={20} y={240}>Bawi: shutdown → no shutdown</text>
+    </Svg>
+  );
+}
+
+function DhcpSnoopingPorts() {
+  return (
+    <Svg viewBox="0 0 720 280" title="DHCP snooping trusted and untrusted ports" desc="A switch has one trusted uplink toward the real DHCP server and untrusted ports for a client PC and an attacker running a rogue DHCP server. Offers from the rogue server are dropped; offers from the real server pass.">
+      <Node x={270} y={100} w={180} h={70} label="Switch" sub="DHCP snooping on" kind="warn" />
+      <Node x={270} y={10} w={180} h={50} label="Real DHCP server" kind="ok" />
+      <Node x={20} y={100} w={150} h={50} label="Client PC" sub="untrusted" kind="end" />
+      <Node x={20} y={200} w={190} h={50} label="Rogue DHCP server" sub="untrusted" kind="danger" />
+      <Link x1={360} y1={60} x2={360} y2={100} />
+      <Link x1={170} y1={125} x2={270} y2={135} />
+      <Link x1={210} y1={225} x2={290} y2={170} dashed />
+      <Badge cx={360} cy={80} label="trusted" kind="ok" />
+      <text className="d-text" x={500} y={60}>Offer ng totoong server: pasok</text>
+      <text className="d-text" x={500} y={230}>Offer ng rogue: ibinabagsak</text>
+      <text className="d-sub" x={500} y={134}>Binding table: MAC, IP, VLAN, port</text>
+    </Svg>
+  );
+}
+
+function DaiCheck() {
+  return (
+    <Svg viewBox="0 0 720 260" title="Dynamic ARP Inspection check" desc="An attacker sends an ARP reply claiming the gateway IP at the attacker's MAC. The switch compares it with the DHCP snooping binding table, finds no match and drops the packet.">
+      <Node x={20} y={20} w={170} h={50} label="Attacker" sub="ARP: 10.1.1.1 is at MAC X" kind="danger" />
+      <Node x={250} y={90} w={170} h={60} label="Switch + DAI" sub="untrusted port" kind="warn" />
+      <Node x={500} y={20} w={200} h={90} label="Binding table" sub="10.1.1.1 = MAC G (gateway)" kind="mid" />
+      <Link x1={190} y1={55} x2={250} y2={110} />
+      <Link x1={420} y1={110} x2={500} y2={80} />
+      <Node x={250} y={190} w={170} h={50} label="X ≠ G → DROP" kind="danger" />
+      <Link x1={335} y1={150} x2={335} y2={190} />
+      <text className="d-sub" x={440} y={160}>Hindi tugma sa table = ibagsak</text>
+      <text className="d-sub" x={440} y={180}>Static host = ARP ACL</text>
+    </Svg>
+  );
+}
+
+function AaaRadiusTacacs() {
+  return (
+    <Svg viewBox="0 0 720 270" title="AAA with RADIUS or TACACS+" desc="An admin logs in to a router. The router asks a central AAA server using TACACS+ over TCP 49 or RADIUS over UDP 1812, and falls back to local accounts if the server does not answer.">
+      <Node x={10} y={100} w={110} h={50} label="Admin" kind="end" />
+      <Node x={190} y={100} w={130} h={50} label="Router" sub="aaa new-model" kind="mid" />
+      <Node x={470} y={30} w={230} h={64} label="AAA server" sub="users · policy · logs" kind="ok" />
+      <Node x={470} y={170} w={230} h={64} label="Local fallback" sub="username ... secret" kind="warn" />
+      <Link x1={120} y1={125} x2={190} y2={125} />
+      <Link x1={320} y1={110} x2={470} y2={62} />
+      <Link x1={320} y1={140} x2={470} y2={202} dashed />
+      <text className="d-sub" x={340} y={74}>TACACS+ TCP 49 (lahat naka-encrypt)</text>
+      <text className="d-sub" x={340} y={92}>RADIUS UDP 1812 (password lang)</text>
+      <text className="d-sub" x={330} y={190}>kapag walang sagot</text>
+      <text className="d-sub" x={10} y={258}>Authentication: sino · Authorization: ano · Accounting: ano ang ginawa</text>
+    </Svg>
+  );
+}
+
+function VpnSiteRemote() {
+  return (
+    <Svg viewBox="0 0 720 300" title="Site-to-site and remote-access VPN" desc="Head Office and Branch are joined by a site-to-site IPsec tunnel across the internet. A remote worker connects to Head Office with a remote-access VPN. At Head Office a firewall separates inside, outside and a DMZ with the public web server, and an IPS inspects traffic.">
+      <Node x={20} y={20} w={150} h={50} label="Head Office" sub="firewall + IPS" kind="mid" />
+      <Node x={550} y={20} w={150} h={50} label="Branch" kind="mid" />
+      <Cloud cx={360} cy={50} label="Internet" />
+      <Link x1={170} y1={45} x2={296} y2={45} />
+      <Link x1={424} y1={45} x2={550} y2={45} />
+      <Badge cx={240} cy={30} label="IPsec ESP" kind="ok" />
+      <Badge cx={490} cy={30} label="tunnel" kind="ok" />
+      <text className="d-sub" x={360} y={110} textAnchor="middle">site-to-site: gateway sa gateway</text>
+      <Node x={270} y={200} w={160} h={50} label="Remote worker" sub="VPN client" kind="end" />
+      <Link x1={350} y1={200} x2={360} y2={88} dashed />
+      <text className="d-sub" x={380} y={150}>remote-access</text>
+      <Node x={20} y={150} w={150} h={50} label="DMZ" sub="public web server" kind="warn" />
+      <Link x1={95} y1={70} x2={95} y2={150} />
+      <Node x={20} y={230} w={150} h={50} label="Inside LAN" kind="end" />
+      <Link x1={95} y1={200} x2={95} y2={230} />
+      <text className="d-sub" x={500} y={250}>IDS = nakikinig lang</text>
+      <text className="d-sub" x={500} y={270}>IPS = inline, humaharang</text>
+    </Svg>
+  );
+}
+
 const DIAGRAMS: Record<DiagramId, () => ReactNode> = {
   'ios-modes': IosModes,
   'media-compare': MediaCompare,
@@ -1115,6 +1208,11 @@ const DIAGRAMS: Record<DiagramId, () => ReactNode> = {
   'acl-flow': AclFlow,
   'acl-placement': AclPlacement,
   'acl-extended-read': AclExtendedRead,
+  'port-security-modes': PortSecurityModes,
+  'dhcp-snooping-ports': DhcpSnoopingPorts,
+  'dai-check': DaiCheck,
+  'aaa-radius-tacacs': AaaRadiusTacacs,
+  'vpn-site-remote': VpnSiteRemote,
 };
 
 export function DiagramView({ id, caption }: { id: DiagramId; caption: string }) {

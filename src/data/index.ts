@@ -43,6 +43,11 @@ import * as deviceHardening from './lessons/device-hardening';
 import * as aclFundamentals from './lessons/acl-fundamentals';
 import * as standardAcls from './lessons/standard-acls';
 import * as extendedAcls from './lessons/extended-acls';
+import * as portSecurity from './lessons/port-security';
+import * as dhcpSnooping from './lessons/dhcp-snooping';
+import * as dai from './lessons/dai';
+import * as aaa from './lessons/aaa';
+import * as vpnArchitecture from './lessons/vpn-architecture';
 
 interface LessonBundle {
   lesson: Lesson;
@@ -60,6 +65,8 @@ const BUNDLES: LessonBundle[] = [
   ntp, snmp, syslog, ssh,
   tftpFtp, securityConcepts, commonThreats,
   deviceHardening, aclFundamentals, standardAcls, extendedAcls,
+  portSecurity, dhcpSnooping, dai, aaa,
+  vpnArchitecture,
 ];
 
 const ALL_QUESTIONS = BUNDLES.flatMap((b) => b.questions);
