@@ -15,7 +15,7 @@ describe('content integrity', () => {
     expect(TAGLISH_PROBLEMS).toEqual([]);
   });
 
-  it('publishes the thirty-one lessons in curriculum order', () => {
+  it('publishes the thirty-five lessons in curriculum order', () => {
     expect(LESSONS.map((l) => l.id)).toEqual([
       'what-is-a-network', 'network-devices', 'lan-vs-wan', 'ios-fundamentals', 'osi-model', 'tcpip-model',
       'ethernet', 'mac-addresses', 'switch-mac-learning', 'cabling-physical', 'binary-basics', 'ipv4-fundamentals',
@@ -23,6 +23,7 @@ describe('content integrity', () => {
       'vlans', 'trunking', 'inter-vlan-routing', 'why-stp', 'stp-fundamentals', 'rapid-pvst', 'stp-protection',
       'etherchannel', 'cdp-lldp', 'dhcp-fundamentals', 'dhcp-server-relay',
       'dns', 'nat-fundamentals', 'nat-static-dynamic', 'pat-overload',
+      'ntp', 'snmp', 'syslog', 'ssh',
     ]);
   });
 

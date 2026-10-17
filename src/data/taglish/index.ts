@@ -4,6 +4,7 @@ import { PART2 } from './part2';
 import { PART3 } from './part3';
 import { PART4 } from './part4';
 import { PART5 } from './part5';
+import { PART6 } from './part6';
 
 /**
  * Taglish translations of the lesson content that is English by default. Entries are positional, in the order the
@@ -17,7 +18,7 @@ export interface TaglishOverlay {
   questions: string[];
 }
 
-export const TAGLISH: Record<string, TaglishOverlay> = { ...PART1, ...PART2, ...PART3, ...PART4, ...PART5 };
+export const TAGLISH: Record<string, TaglishOverlay> = { ...PART1, ...PART2, ...PART3, ...PART4, ...PART5, ...PART6 };
 
 /** Mismatches between the overlay and the lesson content; the data validation test requires this to be empty. */
 export const TAGLISH_PROBLEMS: string[] = [];

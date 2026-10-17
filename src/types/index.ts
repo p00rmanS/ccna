@@ -39,7 +39,11 @@ export type DiagramId =
   | 'dns-resolution'
   | 'nat-terms'
   | 'nat-static-dynamic'
-  | 'pat-ports';
+  | 'pat-ports'
+  | 'ntp-strata'
+  | 'snmp-flow'
+  | 'syslog-levels'
+  | 'ssh-vs-telnet';
 
 export type InteractiveId =
   | 'guess-device'

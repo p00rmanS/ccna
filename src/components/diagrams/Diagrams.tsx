@@ -866,6 +866,81 @@ function PatPorts() {
   );
 }
 
+function NtpStrata() {
+  return (
+    <Svg viewBox="0 0 720 280" title="NTP stratum hierarchy" desc="A reference clock is stratum 0. A server attached to it is stratum 1. Servers that sync from it are stratum 2, and their clients are stratum 3. Each layer adds one to the stratum number.">
+      <Node x={250} y={10} w={220} h={44} label="Reference clock" sub="stratum 0 (GPS / atomic)" kind="warn" />
+      <Node x={250} y={84} w={220} h={44} label="NTP server" sub="stratum 1" kind="ok" />
+      <Node x={110} y={160} w={200} h={44} label="Router R1" sub="stratum 2" kind="mid" />
+      <Node x={410} y={160} w={200} h={44} label="Router R2" sub="stratum 2" kind="mid" />
+      <Node x={60} y={230} w={150} h={40} label="Switch" sub="stratum 3" kind="end" />
+      <Node x={260} y={230} w={150} h={40} label="Switch" sub="stratum 3" kind="end" />
+      <Node x={470} y={230} w={150} h={40} label="PC / server" sub="stratum 3" kind="end" />
+      <Link x1={360} y1={54} x2={360} y2={84} />
+      <Link x1={330} y1={128} x2={210} y2={160} />
+      <Link x1={390} y1={128} x2={510} y2={160} />
+      <Link x1={170} y1={204} x2={135} y2={230} />
+      <Link x1={250} y1={204} x2={335} y2={230} />
+      <Link x1={510} y1={204} x2={545} y2={230} />
+      <text className="d-sub" x={500} y={32}>mas mababa = mas malapit sa totoong oras</text>
+    </Svg>
+  );
+}
+
+function SnmpFlow() {
+  return (
+    <Svg viewBox="0 0 720 260" title="SNMP polling and traps" desc="The network management station sends GET requests to the agent on a managed switch on UDP port 161 and the agent replies. When something fails the agent sends a trap to the management station on UDP port 162.">
+      <Node x={30} y={90} w={190} h={70} label="NMS (manager)" sub="nagtatanong at nakikinig" kind="warn" />
+      <Node x={500} y={90} w={190} h={70} label="Switch + agent" sub="MIB: CPU, interfaces..." kind="mid" />
+      <Link x1={220} y1={110} x2={500} y2={110} />
+      <Link x1={500} y1={140} x2={220} y2={140} dashed />
+      <text className="d-text" x={360} y={100} textAnchor="middle">GET / SET  (UDP 161)</text>
+      <text className="d-sub" x={360} y={158} textAnchor="middle">TRAP / INFORM  (UDP 162)</text>
+      <Badge cx={360} cy={50} label="polling: tanong" kind="end" />
+      <Badge cx={360} cy={210} label="trap: sigaw" kind="danger" />
+      <text className="d-sub" x={360} y={245} textAnchor="middle">v1/v2c: community string  ·  v3: authentication + encryption</text>
+    </Svg>
+  );
+}
+
+function SyslogLevels() {
+  const L = [
+    ['0', 'Emergencies', 'danger'], ['1', 'Alerts', 'danger'], ['2', 'Critical', 'danger'], ['3', 'Errors', 'warn'],
+    ['4', 'Warnings', 'warn'], ['5', 'Notifications', 'ok'], ['6', 'Informational', 'ok'], ['7', 'Debugging', 'end'],
+  ] as const;
+  return (
+    <Svg viewBox="0 0 720 220" title="Syslog severity levels" desc="Eight severity levels from 0 emergencies, the most serious, to 7 debugging, the least serious. A threshold of N shows levels 0 through N.">
+      {L.map(([n, name, kind], i) => (
+        <Node key={n} x={10 + i * 88} y={60} w={82} h={70} label={n} sub={name} kind={kind} />
+      ))}
+      <text className="d-sub" x={10} y={44}>mas seryoso</text>
+      <text className="d-sub" x={710} y={44} textAnchor="end">mas madaldal</text>
+      <line className="d-line" x1={10} y1={160} x2={450} y2={160} />
+      <text className="d-text" x={10} y={186}>logging trap 4 {'→'} ipinapadala ang 0, 1, 2, 3, 4</text>
+      <text className="d-sub" x={10} y={206}>Every Awesome Cisco Engineer Will Need Ice cream Daily</text>
+    </Svg>
+  );
+}
+
+function SshVsTelnet() {
+  return (
+    <Svg viewBox="0 0 720 260" title="Telnet versus SSH" desc="Telnet on TCP 23 sends the username and password in clear text that anyone on the path can read. SSH on TCP 22 encrypts the whole session so a sniffer only sees unreadable data.">
+      <text className="d-sub" x={16} y={20}>Telnet (TCP 23): plain text</text>
+      <Node x={20} y={32} w={120} h={44} label="Admin PC" kind="end" />
+      <Node x={560} y={32} w={140} h={44} label="Router" kind="mid" />
+      <Link x1={140} y1={54} x2={560} y2={54} />
+      <Node x={250} y={96} w={220} h={34} label="user: admin pass: cisco" kind="danger" />
+      <text className="d-sub" x={360} y={46} textAnchor="middle">nababasa ng sniffer</text>
+      <text className="d-sub" x={16} y={158}>SSH (TCP 22): encrypted</text>
+      <Node x={20} y={170} w={120} h={44} label="Admin PC" kind="end" />
+      <Node x={560} y={170} w={140} h={44} label="Router" kind="mid" />
+      <Link x1={140} y1={192} x2={560} y2={192} />
+      <Node x={250} y={226} w={220} h={30} label="x9#Qk2!pL0aR...  " kind="ok" />
+      <text className="d-sub" x={360} y={184} textAnchor="middle">hindi mabasa ng sniffer</text>
+    </Svg>
+  );
+}
+
 const DIAGRAMS: Record<DiagramId, () => ReactNode> = {
   'ios-modes': IosModes,
   'media-compare': MediaCompare,
@@ -896,6 +971,10 @@ const DIAGRAMS: Record<DiagramId, () => ReactNode> = {
   'nat-terms': NatTerms,
   'nat-static-dynamic': NatStaticDynamic,
   'pat-ports': PatPorts,
+  'ntp-strata': NtpStrata,
+  'snmp-flow': SnmpFlow,
+  'syslog-levels': SyslogLevels,
+  'ssh-vs-telnet': SshVsTelnet,
 };
 
 export function DiagramView({ id, caption }: { id: DiagramId; caption: string }) {

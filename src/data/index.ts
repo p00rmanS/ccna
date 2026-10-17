@@ -32,6 +32,10 @@ import * as dns from './lessons/dns';
 import * as natFundamentals from './lessons/nat-fundamentals';
 import * as natStaticDynamic from './lessons/nat-static-dynamic';
 import * as patOverload from './lessons/pat-overload';
+import * as ntp from './lessons/ntp';
+import * as snmp from './lessons/snmp';
+import * as syslog from './lessons/syslog';
+import * as ssh from './lessons/ssh';
 
 interface LessonBundle {
   lesson: Lesson;
@@ -46,6 +50,7 @@ const BUNDLES: LessonBundle[] = [
   vlans, trunking, interVlanRouting, whyStp, stpFundamentals, rapidPvst, stpProtection,
   etherchannel, cdpLldp, dhcpFundamentals, dhcpServerRelay,
   dns, natFundamentals, natStaticDynamic, patOverload,
+  ntp, snmp, syslog, ssh,
 ];
 
 const ALL_QUESTIONS = BUNDLES.flatMap((b) => b.questions);
