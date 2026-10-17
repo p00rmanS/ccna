@@ -39,6 +39,10 @@ import * as ssh from './lessons/ssh';
 import * as tftpFtp from './lessons/tftp-ftp';
 import * as securityConcepts from './lessons/security-concepts';
 import * as commonThreats from './lessons/common-threats';
+import * as deviceHardening from './lessons/device-hardening';
+import * as aclFundamentals from './lessons/acl-fundamentals';
+import * as standardAcls from './lessons/standard-acls';
+import * as extendedAcls from './lessons/extended-acls';
 
 interface LessonBundle {
   lesson: Lesson;
@@ -55,6 +59,7 @@ const BUNDLES: LessonBundle[] = [
   dns, natFundamentals, natStaticDynamic, patOverload,
   ntp, snmp, syslog, ssh,
   tftpFtp, securityConcepts, commonThreats,
+  deviceHardening, aclFundamentals, standardAcls, extendedAcls,
 ];
 
 const ALL_QUESTIONS = BUNDLES.flatMap((b) => b.questions);

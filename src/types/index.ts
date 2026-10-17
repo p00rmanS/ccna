@@ -46,7 +46,11 @@ export type DiagramId =
   | 'ssh-vs-telnet'
   | 'tftp-vs-ftp'
   | 'security-chain'
-  | 'threat-map';
+  | 'threat-map'
+  | 'hardening-layers'
+  | 'acl-flow'
+  | 'acl-placement'
+  | 'acl-extended-read';
 
 export type InteractiveId =
   | 'guess-device'

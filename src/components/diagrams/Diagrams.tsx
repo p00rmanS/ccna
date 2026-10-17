@@ -1004,6 +1004,76 @@ function ThreatMap() {
   );
 }
 
+function HardeningLayers() {
+  return (
+    <Svg viewBox="0 0 720 260" title="Ways into a Cisco device and how to protect each" desc="Console, VTY remote lines and privileged EXEC are the three doors into a device. Each is protected: console with login local and a timeout, VTY with SSH only and local users, and privileged EXEC with enable secret. Unused ports are shut down.">
+      <Node x={280} y={10} w={160} h={50} label="Router / Switch" kind="warn" />
+      <Node x={20} y={100} w={200} h={64} label="Console" sub="login local + exec-timeout" kind="mid" />
+      <Node x={260} y={100} w={200} h={64} label="VTY (remote)" sub="SSH only + login local" kind="mid" />
+      <Node x={500} y={100} w={200} h={64} label="Privileged EXEC" sub="enable secret (hash)" kind="mid" />
+      <Link x1={320} y1={60} x2={120} y2={100} />
+      <Link x1={360} y1={60} x2={360} y2={100} />
+      <Link x1={400} y1={60} x2={600} y2={100} />
+      <Node x={20} y={196} w={320} h={44} label="Unused ports: shutdown + unused VLAN" kind="ok" />
+      <Node x={380} y={196} w={320} h={44} label="Banner: legal warning, no welcome" kind="end" />
+    </Svg>
+  );
+}
+
+function AclFlow() {
+  return (
+    <Svg viewBox="0 0 720 280" title="How a router evaluates an ACL" desc="A packet is compared with rule 10, then 20, then 30. The first matching rule permits or denies it and stops the search. If nothing matches, the implicit deny drops the packet.">
+      <Node x={20} y={110} w={110} h={50} label="Packet" kind="end" />
+      <Node x={180} y={20} w={200} h={44} label="10 deny host .10" kind="danger" />
+      <Node x={180} y={84} w={200} h={44} label="20 permit 192.168.1.0/24" kind="ok" />
+      <Node x={180} y={148} w={200} h={44} label="30 permit tcp ... eq 80" kind="ok" />
+      <Node x={180} y={212} w={200} h={44} label="implicit deny any" sub="nakatago" kind="danger" />
+      <Link x1={130} y1={135} x2={180} y2={42} />
+      <Link x1={130} y1={135} x2={180} y2={106} />
+      <Link x1={130} y1={135} x2={180} y2={170} />
+      <Link x1={130} y1={135} x2={180} y2={234} dashed />
+      <text className="d-text" x={420} y={50}>tugma? bawal, humihinto</text>
+      <text className="d-text" x={420} y={114}>tugma? pasok, humihinto</text>
+      <text className="d-text" x={420} y={178}>tugma? pasok, humihinto</text>
+      <text className="d-sub" x={420} y={240}>walang tugma: ibabagsak</text>
+    </Svg>
+  );
+}
+
+function AclPlacement() {
+  return (
+    <Svg viewBox="0 0 720 240" title="ACL placement" desc="An extended ACL is placed close to the source, so unwanted traffic is dropped early. A standard ACL is placed close to the destination because it only knows the source address.">
+      <Node x={20} y={90} w={110} h={50} label="Source" kind="end" />
+      <Node x={190} y={90} w={110} h={50} label="R1" kind="mid" />
+      <Node x={360} y={90} w={110} h={50} label="R2" kind="mid" />
+      <Node x={530} y={90} w={110} h={50} label="R3" kind="mid" />
+      <Node x={640} y={160} w={70} h={44} label="Dest" kind="end" />
+      <Link x1={130} y1={115} x2={190} y2={115} />
+      <Link x1={300} y1={115} x2={360} y2={115} />
+      <Link x1={470} y1={115} x2={530} y2={115} />
+      <Link x1={620} y1={140} x2={670} y2={160} />
+      <Badge cx={190} cy={70} label="EXT" kind="ok" />
+      <text className="d-sub" x={150} y={50}>extended: malapit sa source</text>
+      <Badge cx={600} cy={190} label="STD" kind="warn" />
+      <text className="d-sub" x={420} y={222}>standard: malapit sa destination</text>
+    </Svg>
+  );
+}
+
+function AclExtendedRead() {
+  return (
+    <Svg viewBox="0 0 720 200" title="Reading an extended ACL entry" desc="An entry reads action, protocol, source with wildcard, destination with wildcard and a port operator, for example permit tcp 192.168.10.0 0.0.0.255 host 10.0.0.50 eq 443.">
+      <Node x={10} y={50} w={90} h={50} label="permit" sub="o deny" kind="ok" />
+      <Node x={110} y={50} w={80} h={50} label="tcp" sub="protocol" kind="end" />
+      <Node x={200} y={50} w={190} h={50} label="192.168.10.0 0.0.0.255" sub="source + wildcard" kind="mid" />
+      <Node x={400} y={50} w={160} h={50} label="host 10.0.0.50" sub="destination" kind="mid" />
+      <Node x={570} y={50} w={130} h={50} label="eq 443" sub="port" kind="warn" />
+      <text className="d-sub" x={10} y={140}>P → S → D → P: Protocol, Source, Destination, Port</text>
+      <text className="d-sub" x={10} y={164}>eq = katumbas · neq = hindi · gt/lt = mas malaki/maliit · range = saklaw</text>
+    </Svg>
+  );
+}
+
 const DIAGRAMS: Record<DiagramId, () => ReactNode> = {
   'ios-modes': IosModes,
   'media-compare': MediaCompare,
@@ -1041,6 +1111,10 @@ const DIAGRAMS: Record<DiagramId, () => ReactNode> = {
   'tftp-vs-ftp': TftpVsFtp,
   'security-chain': SecurityChain,
   'threat-map': ThreatMap,
+  'hardening-layers': HardeningLayers,
+  'acl-flow': AclFlow,
+  'acl-placement': AclPlacement,
+  'acl-extended-read': AclExtendedRead,
 };
 
 export function DiagramView({ id, caption }: { id: DiagramId; caption: string }) {
