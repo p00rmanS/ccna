@@ -941,6 +941,69 @@ function SshVsTelnet() {
   );
 }
 
+function TftpVsFtp() {
+  return (
+    <Svg viewBox="0 0 720 280" title="TFTP versus FTP" desc="TFTP sends a file over UDP port 69 with no login. FTP opens a control connection on TCP port 21 with a login, and a separate data connection on TCP port 20 to move the file.">
+      <text className="d-sub" x={16} y={20}>TFTP: isang transfer, walang login</text>
+      <Node x={20} y={32} w={120} h={44} label="Router" kind="end" />
+      <Node x={560} y={32} w={140} h={44} label="TFTP server" kind="mid" />
+      <Link x1={140} y1={54} x2={560} y2={54} />
+      <Badge cx={350} cy={54} label="UDP 69" kind="warn" />
+      <text className="d-sub" x={350} y={86} textAnchor="middle">walang username o password</text>
+      <text className="d-sub" x={16} y={130}>FTP: control + data, may login</text>
+      <Node x={20} y={142} w={120} h={44} label="Router / PC" kind="end" />
+      <Node x={560} y={142} w={140} h={44} label="FTP server" kind="mid" />
+      <Link x1={140} y1={156} x2={560} y2={156} />
+      <Link x1={140} y1={176} x2={560} y2={176} dashed />
+      <Badge cx={350} cy={150} label="TCP 21 control" kind="ok" />
+      <Badge cx={350} cy={186} label="TCP 20 data" kind="end" />
+      <text className="d-sub" x={360} y={230} textAnchor="middle">Parehong plain text. Ligtas na alternatibo: SFTP / SCP (SSH, TCP 22)</text>
+      <Node x={200} y={240} w={320} h={30} label="Backup: copy running-config tftp:" kind="default" />
+    </Svg>
+  );
+}
+
+function SecurityChain() {
+  return (
+    <Svg viewBox="0 0 720 220" title="Threat, exploit, vulnerability and asset" desc="A threat uses an exploit against a vulnerability to harm an asset. Mitigation sits in the path and reduces the risk.">
+      <Node x={10} y={70} w={120} h={60} label="Threat" sub="sino ang aatake" kind="danger" />
+      <Node x={170} y={70} w={120} h={60} label="Exploit" sub="paano" kind="warn" />
+      <Node x={330} y={70} w={130} h={60} label="Vulnerability" sub="anong butas" kind="warn" />
+      <Node x={500} y={70} w={120} h={60} label="Asset" sub="ano ang apektado" kind="end" />
+      <Link x1={130} y1={100} x2={170} y2={100} />
+      <Link x1={290} y1={100} x2={330} y2={100} />
+      <Link x1={460} y1={100} x2={500} y2={100} />
+      <Node x={250} y={160} w={240} h={44} label="Mitigation" sub="patch, ACL, training, backup" kind="ok" />
+      <Link x1={370} y1={160} x2={395} y2={130} dashed />
+      <text className="d-sub" x={10} y={30}>CIA: Confidentiality · Integrity · Availability</text>
+      <text className="d-sub" x={10} y={50}>Panganib = posibilidad × epekto</text>
+    </Svg>
+  );
+}
+
+function ThreatMap() {
+  const rows = [
+    ['Malware', 'update + antivirus + backup'],
+    ['Phishing', 'training + MFA + email filter'],
+    ['Spoofing', 'DHCP snooping, DAI, port security'],
+    ['Man-in-the-middle', 'encryption (TLS, VPN) + authentication'],
+    ['DoS / DDoS', 'rate limiting + scrubbing + redundancy'],
+  ] as const;
+  return (
+    <Svg viewBox="0 0 720 300" title="Common threats and their usual defences" desc="Malware is countered by updates and antivirus; phishing by training and MFA; spoofing by DHCP snooping, DAI and port security; man-in-the-middle by encryption and authentication; DoS by rate limiting and scrubbing.">
+      <text className="d-title" x={20} y={24}>Banta</text>
+      <text className="d-title" x={300} y={24}>Karaniwang depensa</text>
+      {rows.map(([a, b], i) => (
+        <g key={a}>
+          <Node x={20} y={36 + i * 52} w={220} h={40} label={a} kind="danger" />
+          <Link x1={240} y1={56 + i * 52} x2={290} y2={56 + i * 52} />
+          <Node x={290} y={36 + i * 52} w={410} h={40} label={b} kind="ok" />
+        </g>
+      ))}
+    </Svg>
+  );
+}
+
 const DIAGRAMS: Record<DiagramId, () => ReactNode> = {
   'ios-modes': IosModes,
   'media-compare': MediaCompare,
@@ -975,6 +1038,9 @@ const DIAGRAMS: Record<DiagramId, () => ReactNode> = {
   'snmp-flow': SnmpFlow,
   'syslog-levels': SyslogLevels,
   'ssh-vs-telnet': SshVsTelnet,
+  'tftp-vs-ftp': TftpVsFtp,
+  'security-chain': SecurityChain,
+  'threat-map': ThreatMap,
 };
 
 export function DiagramView({ id, caption }: { id: DiagramId; caption: string }) {

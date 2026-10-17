@@ -12,6 +12,10 @@ import { EXTRA4 } from './extra4';
 import { EXTRA5 } from './extra5';
 import { EXTRA6 } from './extra6';
 import { EXTRA7 } from './extra7';
+import { BATCH_A } from './batchA';
+import { BATCH_B } from './batchB';
+import { BATCH_C } from './batchC';
+import { BATCH_D } from './batchD';
 
 /**
  * Taglish translations of the lesson content that is English by default. Entries are positional, in the order the
@@ -33,10 +37,10 @@ export interface TaglishExtra {
   wrong: Array<Record<number, string>>;
 }
 
-export const TAGLISH: Record<string, TaglishOverlay> = { ...PART1, ...PART2, ...PART3, ...PART4, ...PART5, ...PART6 };
+export const TAGLISH: Record<string, TaglishOverlay> = { ...PART1, ...PART2, ...PART3, ...PART4, ...PART5, ...PART6, ...BATCH_A.basic, ...BATCH_B.basic, ...BATCH_C.basic, ...BATCH_D.basic };
 
 /** Mismatches between the overlay and the lesson content; the data validation test requires this to be empty. */
-export const TAGLISH_EXTRA: Record<string, TaglishExtra> = { ...EXTRA1, ...EXTRA2, ...EXTRA3, ...EXTRA4, ...EXTRA5, ...EXTRA6, ...EXTRA7 };
+export const TAGLISH_EXTRA: Record<string, TaglishExtra> = { ...EXTRA1, ...EXTRA2, ...EXTRA3, ...EXTRA4, ...EXTRA5, ...EXTRA6, ...EXTRA7, ...BATCH_A.extra, ...BATCH_B.extra, ...BATCH_C.extra, ...BATCH_D.extra };
 
 export const TAGLISH_PROBLEMS: string[] = [];
 

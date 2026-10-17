@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { FLASHCARDS, LABS, LESSONS, QUESTIONS, nextLesson, previousLesson } from './index';
+import { FLASHCARDS, LABS, LESSONS, QUESTIONS, moduleOfLesson, nextLesson, previousLesson } from './index';
 import { TAGLISH_PROBLEMS } from './taglish';
 import { validateContent } from './validate';
 import { CURRICULUM } from './curriculum';
@@ -15,16 +15,13 @@ describe('content integrity', () => {
     expect(TAGLISH_PROBLEMS).toEqual([]);
   });
 
-  it('publishes the thirty-five lessons in curriculum order', () => {
-    expect(LESSONS.map((l) => l.id)).toEqual([
-      'what-is-a-network', 'network-devices', 'lan-vs-wan', 'ios-fundamentals', 'osi-model', 'tcpip-model',
-      'ethernet', 'mac-addresses', 'switch-mac-learning', 'cabling-physical', 'binary-basics', 'ipv4-fundamentals',
-      'subnetting-from-zero', 'vlsm', 'ipv6-fundamentals', 'ipv6-address-types',
-      'vlans', 'trunking', 'inter-vlan-routing', 'why-stp', 'stp-fundamentals', 'rapid-pvst', 'stp-protection',
-      'etherchannel', 'cdp-lldp', 'dhcp-fundamentals', 'dhcp-server-relay',
-      'dns', 'nat-fundamentals', 'nat-static-dynamic', 'pat-overload',
-      'ntp', 'snmp', 'syslog', 'ssh',
-    ]);
+  it('publishes every lesson once, in curriculum order, under the module it declares', () => {
+    const ids = LESSONS.map((l) => l.id);
+    expect(new Set(ids).size).toBe(ids.length);
+    expect(ids.slice(0, 6)).toEqual(['what-is-a-network', 'network-devices', 'lan-vs-wan', 'ios-fundamentals', 'osi-model', 'tcpip-model']);
+    expect(LESSONS.filter((l) => moduleOfLesson(l.id)?.id !== l.moduleId).map((l) => l.id)).toEqual([]);
+    const order = LESSONS.map((l) => CURRICULUM.flatMap((p) => p.modules).findIndex((mod) => mod.id === l.moduleId));
+    expect([...order].sort((a, b) => a - b)).toEqual(order);
   });
 
   it('links lessons into a previous/next chain', () => {

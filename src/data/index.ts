@@ -36,6 +36,9 @@ import * as ntp from './lessons/ntp';
 import * as snmp from './lessons/snmp';
 import * as syslog from './lessons/syslog';
 import * as ssh from './lessons/ssh';
+import * as tftpFtp from './lessons/tftp-ftp';
+import * as securityConcepts from './lessons/security-concepts';
+import * as commonThreats from './lessons/common-threats';
 
 interface LessonBundle {
   lesson: Lesson;
@@ -51,6 +54,7 @@ const BUNDLES: LessonBundle[] = [
   etherchannel, cdpLldp, dhcpFundamentals, dhcpServerRelay,
   dns, natFundamentals, natStaticDynamic, patOverload,
   ntp, snmp, syslog, ssh,
+  tftpFtp, securityConcepts, commonThreats,
 ];
 
 const ALL_QUESTIONS = BUNDLES.flatMap((b) => b.questions);

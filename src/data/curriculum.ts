@@ -108,7 +108,7 @@ export const CURRICULUM: PhaseOutline[] = [
       { id: '4.9', title: 'Syslog', domain: 'D4', lessonIds: ['syslog'], topics: ['Severity levels 0–7'] },
       { id: '4.10', title: 'QoS', domain: 'D4', lessonIds: [], topics: ['Classification, marking, queuing, policing, shaping'] },
       { id: '4.11', title: 'SSH', domain: 'D4', lessonIds: ['ssh'], topics: ['Secure remote administration'] },
-      { id: '4.12', title: 'TFTP and FTP', domain: 'D4', lessonIds: [], topics: ['File transfer roles'], note: 'Added during the audit — exam objective 4.9 was not in the source outline.' },
+      { id: '4.12', title: 'TFTP and FTP', domain: 'D4', lessonIds: ['tftp-ftp'], topics: ['File transfer roles'], note: 'Added during the audit — exam objective 4.9 was not in the source outline.' },
     ],
   },
   {
@@ -116,8 +116,8 @@ export const CURRICULUM: PhaseOutline[] = [
     title: 'Phase 5 — Security Fundamentals',
     blurb: 'Threats, hardening, ACLs and Layer 2 security. About 15% of the exam.',
     modules: [
-      { id: '5.1', title: 'Security Concepts', domain: 'D5', lessonIds: [], topics: ['Threat, vulnerability, exploit, mitigation'] },
-      { id: '5.2', title: 'Common Threats', domain: 'D5', lessonIds: [], topics: ['Malware, phishing, MITM, DoS, spoofing'] },
+      { id: '5.1', title: 'Security Concepts', domain: 'D5', lessonIds: ['security-concepts'], topics: ['Threat, vulnerability, exploit, mitigation'] },
+      { id: '5.2', title: 'Common Threats', domain: 'D5', lessonIds: ['common-threats'], topics: ['Malware, phishing, MITM, DoS, spoofing'] },
       { id: '5.3', title: 'Device Hardening', domain: 'D5', lessonIds: [], topics: ['Enable secret', 'Banners', 'Unused ports'] },
       { id: '5.4', title: 'ACL Fundamentals', domain: 'D5', lessonIds: [], topics: ['Permit/deny logic', 'Wildcard masks'] },
       { id: '5.5', title: 'Standard ACLs', domain: 'D5', lessonIds: [], topics: [] },

@@ -43,7 +43,10 @@ export type DiagramId =
   | 'ntp-strata'
   | 'snmp-flow'
   | 'syslog-levels'
-  | 'ssh-vs-telnet';
+  | 'ssh-vs-telnet'
+  | 'tftp-vs-ftp'
+  | 'security-chain'
+  | 'threat-map';
 
 export type InteractiveId =
   | 'guess-device'
