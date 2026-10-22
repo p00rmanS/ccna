@@ -55,7 +55,11 @@ export type DiagramId =
   | 'dhcp-snooping-ports'
   | 'dai-check'
   | 'aaa-radius-tacacs'
-  | 'vpn-site-remote';
+  | 'vpn-site-remote'
+  | 'router-hops'
+  | 'route-entry'
+  | 'static-route-pair'
+  | 'default-route-stub';
 
 export type InteractiveId =
   | 'guess-device'

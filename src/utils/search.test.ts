@@ -38,7 +38,7 @@ describe('search', () => {
     expect(search(index, 'JEEPNEY').some((h) => h.doc.to === '/learn/what-is-a-network')).toBe(true);
   });
   it('surfaces planned modules honestly instead of returning nothing', () => {
-    const hits = search(index, 'OSPF');
+    const hits = search(index, 'Terraform');
     expect(hits.length).toBeGreaterThan(0);
     expect(hits.some((h) => h.doc.kind === 'Planned module')).toBe(true);
     expect(hits.every((h) => h.doc.kind !== 'Lesson')).toBe(true);

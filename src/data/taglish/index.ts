@@ -16,6 +16,8 @@ import { BATCH_A } from './batchA';
 import { BATCH_B } from './batchB';
 import { BATCH_C } from './batchC';
 import { BATCH_D } from './batchD';
+import { BATCH_E } from './batchE';
+import { BATCH_F } from './batchF';
 
 /**
  * Taglish translations of the lesson content that is English by default. Entries are positional, in the order the
@@ -37,10 +39,10 @@ export interface TaglishExtra {
   wrong: Array<Record<number, string>>;
 }
 
-export const TAGLISH: Record<string, TaglishOverlay> = { ...PART1, ...PART2, ...PART3, ...PART4, ...PART5, ...PART6, ...BATCH_A.basic, ...BATCH_B.basic, ...BATCH_C.basic, ...BATCH_D.basic };
+export const TAGLISH: Record<string, TaglishOverlay> = { ...PART1, ...PART2, ...PART3, ...PART4, ...PART5, ...PART6, ...BATCH_A.basic, ...BATCH_B.basic, ...BATCH_C.basic, ...BATCH_D.basic, ...BATCH_E.basic, ...BATCH_F.basic };
 
 /** Mismatches between the overlay and the lesson content; the data validation test requires this to be empty. */
-export const TAGLISH_EXTRA: Record<string, TaglishExtra> = { ...EXTRA1, ...EXTRA2, ...EXTRA3, ...EXTRA4, ...EXTRA5, ...EXTRA6, ...EXTRA7, ...BATCH_A.extra, ...BATCH_B.extra, ...BATCH_C.extra, ...BATCH_D.extra };
+export const TAGLISH_EXTRA: Record<string, TaglishExtra> = { ...EXTRA1, ...EXTRA2, ...EXTRA3, ...EXTRA4, ...EXTRA5, ...EXTRA6, ...EXTRA7, ...BATCH_A.extra, ...BATCH_B.extra, ...BATCH_C.extra, ...BATCH_D.extra, ...BATCH_E.extra, ...BATCH_F.extra };
 
 export const TAGLISH_PROBLEMS: string[] = [];
 

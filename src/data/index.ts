@@ -48,6 +48,10 @@ import * as dhcpSnooping from './lessons/dhcp-snooping';
 import * as dai from './lessons/dai';
 import * as aaa from './lessons/aaa';
 import * as vpnArchitecture from './lessons/vpn-architecture';
+import * as routerForwarding from './lessons/router-forwarding';
+import * as routingTable from './lessons/routing-table';
+import * as staticRoutes from './lessons/static-routes';
+import * as defaultRoutes from './lessons/default-routes';
 
 interface LessonBundle {
   lesson: Lesson;
@@ -67,6 +71,7 @@ const BUNDLES: LessonBundle[] = [
   deviceHardening, aclFundamentals, standardAcls, extendedAcls,
   portSecurity, dhcpSnooping, dai, aaa,
   vpnArchitecture,
+  routerForwarding, routingTable, staticRoutes, defaultRoutes,
 ];
 
 const ALL_QUESTIONS = BUNDLES.flatMap((b) => b.questions);

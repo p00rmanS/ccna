@@ -1167,6 +1167,80 @@ function VpnSiteRemote() {
   );
 }
 
+function RouterHops() {
+  return (
+    <Svg viewBox="0 0 720 280" title="Addresses across two routers" desc="A PC sends a packet to a server through two routers. The source and destination IP addresses stay the same on every link, but the source and destination MAC addresses change on each link.">
+      <Node x={10} y={90} w={90} h={50} label="PC1" kind="end" />
+      <Node x={190} y={90} w={90} h={50} label="R1" kind="mid" />
+      <Node x={370} y={90} w={90} h={50} label="R2" kind="mid" />
+      <Node x={560} y={90} w={110} h={50} label="Server" kind="end" />
+      <Link x1={100} y1={115} x2={190} y2={115} />
+      <Link x1={280} y1={115} x2={370} y2={115} />
+      <Link x1={460} y1={115} x2={560} y2={115} />
+      <text className="d-text" x={145} y={80} textAnchor="middle">L2: PC1 → R1</text>
+      <text className="d-text" x={325} y={80} textAnchor="middle">L2: R1 → R2</text>
+      <text className="d-text" x={510} y={80} textAnchor="middle">L2: R2 → Server</text>
+      <rect className="d-box-ok" x={10} y={170} width={660} height={44} rx={8} />
+      <text className="d-text" x={340} y={196} textAnchor="middle">IP: 192.168.1.10 → 10.0.0.5  (pareho sa lahat ng link)</text>
+      <text className="d-sub" x={340} y={244} textAnchor="middle">IP = end to end · MAC = hop by hop · TTL bumababa ng 1 bawat router</text>
+    </Svg>
+  );
+}
+
+function RouteEntry() {
+  return (
+    <Svg viewBox="0 0 720 200" title="Parts of a route entry" desc="The route O 10.2.0.0/16 [110/2] via 10.1.1.2, 00:01:10, GigabitEthernet0/0 has a code O for OSPF, the prefix 10.2.0.0/16, an administrative distance of 110, a metric of 2, a next hop of 10.1.1.2, an age and an exit interface.">
+      <Node x={10} y={60} w={60} h={50} label="O" sub="code" kind="warn" />
+      <Node x={80} y={60} w={130} h={50} label="10.2.0.0/16" sub="prefix" kind="end" />
+      <Node x={220} y={60} w={110} h={50} label="[110/2]" sub="AD / metric" kind="ok" />
+      <Node x={340} y={60} w={130} h={50} label="via 10.1.1.2" sub="next hop" kind="mid" />
+      <Node x={480} y={60} w={90} h={50} label="00:01:10" sub="age" kind="default" />
+      <Node x={580} y={60} w={130} h={50} label="Gi0/0" sub="exit interface" kind="mid" />
+      <text className="d-sub" x={10} y={150}>Pagpili: 1) longest prefix · 2) AD mababa · 3) metric mababa</text>
+      <text className="d-sub" x={10} y={174}>AD: C 0 · S 1 · EIGRP 90 · OSPF 110 · RIP 120</text>
+    </Svg>
+  );
+}
+
+function StaticRoutePair() {
+  return (
+    <Svg viewBox="0 0 720 240" title="Forward and return static routes" desc="R1 has a static route to LAN2 through R2, and R2 has a return static route to LAN1 through R1. Both are needed for a ping reply to come back.">
+      <Node x={10} y={90} w={110} h={50} label="LAN1" sub="192.168.1.0/24" kind="end" />
+      <Node x={190} y={90} w={90} h={50} label="R1" kind="mid" />
+      <Node x={400} y={90} w={90} h={50} label="R2" kind="mid" />
+      <Node x={580} y={90} w={120} h={50} label="LAN2" sub="192.168.2.0/24" kind="end" />
+      <Link x1={120} y1={115} x2={190} y2={115} />
+      <Link x1={280} y1={115} x2={400} y2={115} />
+      <Link x1={490} y1={115} x2={580} y2={115} />
+      <text className="d-text" x={340} y={90} textAnchor="middle">172.16.0.0/30</text>
+      <rect className="d-box-ok" x={140} y={160} width={190} height={34} rx={6} />
+      <text className="d-sub" x={235} y={182} textAnchor="middle">R1: ip route LAN2 via R2</text>
+      <rect className="d-box-warn" x={360} y={160} width={190} height={34} rx={6} />
+      <text className="d-sub" x={455} y={182} textAnchor="middle">R2: ip route LAN1 via R1 (PABALIK)</text>
+      <text className="d-sub" x={360} y={225} textAnchor="middle">Walang return route = dumarating ang request, walang reply</text>
+    </Svg>
+  );
+}
+
+function DefaultRouteStub() {
+  return (
+    <Svg viewBox="0 0 720 250" title="Default route on a stub network" desc="A customer router R1 has a default route 0.0.0.0/0 toward the ISP. The ISP has a static return route to the customer LAN. Anything R1 has no specific route for is sent to the ISP and on to the internet.">
+      <Node x={10} y={80} w={120} h={50} label="LAN" sub="192.168.1.0/24" kind="end" />
+      <Node x={190} y={80} w={100} h={50} label="R1" sub="stub" kind="mid" />
+      <Node x={400} y={80} w={100} h={50} label="ISP" kind="warn" />
+      <Cloud cx={620} cy={105} label="Internet" />
+      <Link x1={130} y1={105} x2={190} y2={105} />
+      <Link x1={290} y1={105} x2={400} y2={105} />
+      <Link x1={500} y1={105} x2={556} y2={105} />
+      <rect className="d-box-ok" x={130} y={150} width={230} height={34} rx={6} />
+      <text className="d-sub" x={245} y={172} textAnchor="middle">R1: ip route 0.0.0.0 0.0.0.0 ISP  (S*)</text>
+      <rect className="d-box-warn" x={380} y={150} width={240} height={34} rx={6} />
+      <text className="d-sub" x={500} y={172} textAnchor="middle">ISP: ip route 192.168.1.0/24 via R1</text>
+      <text className="d-sub" x={360} y={220} textAnchor="middle">/0 = pinakamaikling prefix: huling gagamitin, "gateway of last resort"</text>
+    </Svg>
+  );
+}
+
 const DIAGRAMS: Record<DiagramId, () => ReactNode> = {
   'ios-modes': IosModes,
   'media-compare': MediaCompare,
@@ -1213,6 +1287,10 @@ const DIAGRAMS: Record<DiagramId, () => ReactNode> = {
   'dai-check': DaiCheck,
   'aaa-radius-tacacs': AaaRadiusTacacs,
   'vpn-site-remote': VpnSiteRemote,
+  'router-hops': RouterHops,
+  'route-entry': RouteEntry,
+  'static-route-pair': StaticRoutePair,
+  'default-route-stub': DefaultRouteStub,
 };
 
 export function DiagramView({ id, caption }: { id: DiagramId; caption: string }) {
