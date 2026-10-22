@@ -52,6 +52,9 @@ import * as routerForwarding from './lessons/router-forwarding';
 import * as routingTable from './lessons/routing-table';
 import * as staticRoutes from './lessons/static-routes';
 import * as defaultRoutes from './lessons/default-routes';
+import * as dynamicRouting from './lessons/dynamic-routing';
+import * as ospfFundamentals from './lessons/ospf-fundamentals';
+import * as ospfConfig from './lessons/ospf-config';
 
 interface LessonBundle {
   lesson: Lesson;
@@ -72,6 +75,7 @@ const BUNDLES: LessonBundle[] = [
   portSecurity, dhcpSnooping, dai, aaa,
   vpnArchitecture,
   routerForwarding, routingTable, staticRoutes, defaultRoutes,
+  dynamicRouting, ospfFundamentals, ospfConfig,
 ];
 
 const ALL_QUESTIONS = BUNDLES.flatMap((b) => b.questions);

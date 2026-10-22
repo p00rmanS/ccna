@@ -59,7 +59,10 @@ export type DiagramId =
   | 'router-hops'
   | 'route-entry'
   | 'static-route-pair'
-  | 'default-route-stub';
+  | 'default-route-stub'
+  | 'routing-protocol-types'
+  | 'ospf-states'
+  | 'ospf-topology';
 
 export type InteractiveId =
   | 'guess-device'

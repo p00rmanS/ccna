@@ -95,6 +95,7 @@ export function QuizRunner({ quizId, title, questions, onExit, onRetry }: Props)
 
   return (
     <div className="stack" style={{ maxWidth: 780 }}>
+      <h1 className="sr-only">{title}</h1>
       <div className="row row-between">
         <button type="button" className="btn btn-sm btn-ghost" onClick={onExit}>← Quit quiz</button>
         <span className="small muted">Question {index + 1} of {questions.length}</span>

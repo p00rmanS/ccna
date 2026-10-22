@@ -1241,6 +1241,64 @@ function DefaultRouteStub() {
   );
 }
 
+function RoutingProtocolTypes() {
+  return (
+    <Svg viewBox="0 0 720 280" title="Types of routing" desc="Routing is static or dynamic. Dynamic protocols are interior or exterior. Interior protocols are distance-vector, such as RIP and EIGRP, or link-state, such as OSPF. BGP is the exterior protocol.">
+      <Node x={270} y={10} w={180} h={44} label="Routing" kind="warn" />
+      <Node x={60} y={90} w={170} h={44} label="Static" sub="manual, walang overhead" kind="end" />
+      <Node x={480} y={90} w={190} h={44} label="Dynamic" sub="protocol, awtomatiko" kind="ok" />
+      <Link x1={330} y1={54} x2={145} y2={90} />
+      <Link x1={390} y1={54} x2={575} y2={90} />
+      <Node x={330} y={176} w={160} h={44} label="IGP" sub="loob ng AS" kind="mid" />
+      <Node x={560} y={176} w={140} h={44} label="EGP" sub="BGP" kind="mid" />
+      <Link x1={540} y1={134} x2={410} y2={176} />
+      <Link x1={600} y1={134} x2={630} y2={176} />
+      <Node x={150} y={240} w={170} h={34} label="Distance-vector: RIP, EIGRP" kind="default" />
+      <Node x={340} y={240} w={170} h={34} label="Link-state: OSPF" kind="default" />
+      <Link x1={380} y1={220} x2={235} y2={240} />
+      <Link x1={410} y1={220} x2={425} y2={240} />
+    </Svg>
+  );
+}
+
+function OspfStates() {
+  const S = [['Down', 'end'], ['Init', 'warn'], ['2-Way', 'warn'], ['ExStart', 'mid'], ['Exchange', 'mid'], ['Loading', 'mid'], ['Full', 'ok']] as const;
+  return (
+    <Svg viewBox="0 0 720 220" title="OSPF neighbour states" desc="Neighbours move from Down to Init when a hello is heard, to 2-Way when they see each other, then ExStart, Exchange and Loading while databases are synchronised, and finally Full.">
+      {S.map(([name, kind], i) => (
+        <g key={name}>
+          <Node x={6 + i * 102} y={70} w={92} h={50} label={name} kind={kind} />
+          {i < S.length - 1 && <Link x1={98 + i * 102} y1={95} x2={108 + i * 102} y2={95} />}
+        </g>
+      ))}
+      <text className="d-sub" x={10} y={160}>Hello (224.0.0.5, 10s) → Init → 2-Way → DBD → LSR/LSU → Full</text>
+      <text className="d-sub" x={10} y={184}>Dapat magtugma: area ID, hello/dead, subnet · Dapat magkaiba: router ID</text>
+    </Svg>
+  );
+}
+
+function OspfTopology() {
+  return (
+    <Svg viewBox="0 0 720 240" title="Three-router single-area OSPF" desc="R1, R2 and R3 are connected in a line, all in area 0. Each has a passive LAN: 192.168.1.0/24 on R1, 192.168.2.0/24 on R2 and 192.168.3.0/24 on R3. Links are 10.0.12.0/30 and 10.0.23.0/30.">
+      <rect className="d-zone" x={140} y={20} width={440} height={150} rx={14} />
+      <text className="d-title" x={150} y={40}>Area 0</text>
+      <Node x={170} y={80} w={90} h={50} label="R1" sub="1.1.1.1" kind="mid" />
+      <Node x={315} y={80} w={90} h={50} label="R2" sub="2.2.2.2" kind="mid" />
+      <Node x={460} y={80} w={90} h={50} label="R3" sub="3.3.3.3" kind="mid" />
+      <Link x1={260} y1={105} x2={315} y2={105} />
+      <Link x1={405} y1={105} x2={460} y2={105} />
+      <text className="d-sub" x={287} y={95} textAnchor="middle">10.0.12.0/30</text>
+      <text className="d-sub" x={432} y={95} textAnchor="middle">10.0.23.0/30</text>
+      <Node x={10} y={80} w={110} h={50} label="LAN 1" sub="passive" kind="end" />
+      <Node x={315} y={190} w={90} h={40} label="LAN 2" sub="passive" kind="end" />
+      <Node x={600} y={80} w={110} h={50} label="LAN 3" sub="passive" kind="end" />
+      <Link x1={120} y1={105} x2={170} y2={105} />
+      <Link x1={360} y1={130} x2={360} y2={190} />
+      <Link x1={550} y1={105} x2={600} y2={105} />
+    </Svg>
+  );
+}
+
 const DIAGRAMS: Record<DiagramId, () => ReactNode> = {
   'ios-modes': IosModes,
   'media-compare': MediaCompare,
@@ -1291,6 +1349,9 @@ const DIAGRAMS: Record<DiagramId, () => ReactNode> = {
   'route-entry': RouteEntry,
   'static-route-pair': StaticRoutePair,
   'default-route-stub': DefaultRouteStub,
+  'routing-protocol-types': RoutingProtocolTypes,
+  'ospf-states': OspfStates,
+  'ospf-topology': OspfTopology,
 };
 
 export function DiagramView({ id, caption }: { id: DiagramId; caption: string }) {
