@@ -27,6 +27,17 @@ function Hook({ section }: { section: Extract<Section, { type: 'hook' }> }) {
   );
 }
 
+function StoryView({ section }: { section: Extract<Section, { type: 'story' }> }) {
+  return (
+    <section className="lesson-block story" aria-labelledby="story-h">
+      <div className="story-eyebrow">Kuwento</div>
+      <h2 id="story-h">{section.title}</h2>
+      {section.paragraphs.map((p, i) => <p key={i}><Rich text={p} /></p>)}
+      <p className="story-moral"><strong>Aral:</strong> <Rich text={section.moral} /></p>
+    </section>
+  );
+}
+
 function AnalogyView({ section }: { section: Extract<Section, { type: 'analogy' }> }) {
   const { settings } = useAppState();
   const body = settings.style === 'taglish' && section.taglish ? section.taglish : section.body;
@@ -88,6 +99,8 @@ export function SectionView({ section }: { section: Section }) {
   switch (section.type) {
     case 'explain':
       return <Explain section={section} />;
+    case 'story':
+      return <StoryView section={section} />;
     case 'analogy':
       return <AnalogyView section={section} />;
     case 'hook':

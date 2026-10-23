@@ -744,3 +744,12 @@ input:focus-visible, textarea:focus-visible, select:focus-visible { outline-offs
   body { background: #fff; background-image: none; }
   .hero, .continue-card, .flash { box-shadow: none; }
 }
+
+/* ---------- Kuwento (story) ---------- */
+.story { position: relative; padding: 22px 26px 18px 30px; background: var(--surface); border: 1px solid var(--border-strong); border-left: 6px solid var(--primary); border-radius: 0 var(--radius) var(--radius) 0; }
+.story-eyebrow { font-family: var(--mono); font-size: 0.7rem; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--primary); }
+.story > h2 { border-bottom: 0; margin-top: 4px; padding-bottom: 0; }
+.story p { font-family: var(--display); font-size: 1.06rem; line-height: 1.8; max-width: 70ch; }
+.story-moral { margin-top: 14px; padding: 10px 14px; border: 1px dashed var(--border-strong); border-radius: 4px; background: var(--surface-2); font-family: var(--font) !important; font-size: 0.95rem !important; }
+@media print { .story { break-inside: avoid; } }
+

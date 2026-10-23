@@ -11,6 +11,7 @@ export const sectionAnchor = (index: number): string => `s-${index}`;
 function labelOf(s: Section): string | null {
   switch (s.type) {
     case 'explain': return 'Understand it';
+    case 'story': return `Kuwento: ${s.title}`;
     case 'analogy': return 'Analogy';
     case 'hook': return 'Pro tip — madaling tandaan';
     case 'interactive': return 'Try it';
