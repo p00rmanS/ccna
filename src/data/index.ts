@@ -55,6 +55,12 @@ import * as defaultRoutes from './lessons/default-routes';
 import * as dynamicRouting from './lessons/dynamic-routing';
 import * as ospfFundamentals from './lessons/ospf-fundamentals';
 import * as ospfConfig from './lessons/ospf-config';
+import * as ospfNeighbors from './lessons/ospf-neighbors';
+import * as ospfDrBdr from './lessons/ospf-dr-bdr';
+import * as fhrp from './lessons/fhrp';
+import * as qos from './lessons/qos';
+import * as wirelessFundamentals from './lessons/wireless-fundamentals';
+import * as wirelessSecurity from './lessons/wireless-security';
 
 interface LessonBundle {
   lesson: Lesson;
@@ -76,6 +82,7 @@ const BUNDLES: LessonBundle[] = [
   vpnArchitecture,
   routerForwarding, routingTable, staticRoutes, defaultRoutes,
   dynamicRouting, ospfFundamentals, ospfConfig,
+  ospfNeighbors, ospfDrBdr, fhrp, qos, wirelessFundamentals, wirelessSecurity,
 ];
 
 const ALL_QUESTIONS = BUNDLES.flatMap((b) => b.questions);

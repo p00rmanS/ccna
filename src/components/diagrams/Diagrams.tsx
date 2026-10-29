@@ -1299,6 +1299,106 @@ function OspfTopology() {
   );
 }
 
+function OspfAdjacencyChecklist() {
+  return (
+    <Svg viewBox="0 0 720 260" title="OSPF adjacency checklist" desc="Two routers must have the same area ID, hello and dead timers, subnet, authentication and MTU, and different router IDs, with OSPF enabled and the interface not passive.">
+      <Node x={20} y={90} w={110} h={60} label="R1" sub="1.1.1.1" kind="mid" />
+      <Node x={590} y={90} w={110} h={60} label="R2" sub="2.2.2.2" kind="mid" />
+      <Link x1={130} y1={120} x2={590} y2={120} />
+      <rect className="d-box-ok" x={170} y={20} width={380} height={30} rx={6} />
+      <text className="d-text" x={360} y={40} textAnchor="middle">TUGMA: Area · Timers · Subnet · Auth · MTU</text>
+      <rect className="d-box-warn" x={170} y={190} width={380} height={30} rx={6} />
+      <text className="d-text" x={360} y={210} textAnchor="middle">MAGKAIBA: Router ID · hindi passive</text>
+      <text className="d-sub" x={360} y={110} textAnchor="middle">INIT = one-way · EXSTART nakabitin = MTU</text>
+    </Svg>
+  );
+}
+
+function OspfDrElection() {
+  return (
+    <Svg viewBox="0 0 720 280" title="DR and BDR election on a segment" desc="Four routers share one Ethernet segment. R3 with priority 100 is the DR, R2 the BDR, and R1 and R4 are DROTHERs that are Full only with the DR and BDR and 2-Way with each other.">
+      <rect className="d-zone" x={40} y={110} width={640} height={50} rx={10} />
+      <text className="d-title" x={50} y={130}>Ethernet segment</text>
+      <Node x={60} y={20} w={110} h={50} label="R1" sub="DROTHER" kind="end" />
+      <Node x={210} y={20} w={110} h={50} label="R2" sub="BDR" kind="warn" />
+      <Node x={400} y={20} w={110} h={50} label="R3" sub="DR (pri 100)" kind="ok" />
+      <Node x={550} y={20} w={110} h={50} label="R4" sub="DROTHER" kind="end" />
+      <Link x1={115} y1={70} x2={115} y2={110} />
+      <Link x1={265} y1={70} x2={265} y2={110} />
+      <Link x1={455} y1={70} x2={455} y2={110} />
+      <Link x1={605} y1={70} x2={605} y2={110} />
+      <text className="d-sub" x={20} y={200}>DROTHER: FULL sa DR/BDR, 2-WAY sa isa&apos;t isa</text>
+      <text className="d-sub" x={20} y={222}>Panalo: priority, saka router ID · hindi pre-emptive</text>
+      <text className="d-sub" x={20} y={244}>224.0.0.5 = lahat ng OSPF · 224.0.0.6 = DR/BDR</text>
+    </Svg>
+  );
+}
+
+function FhrpVirtualGateway() {
+  return (
+    <Svg viewBox="0 0 720 270" title="Virtual gateway shared by two routers" desc="A PC uses the virtual IP 192.168.1.254 as its default gateway. Router R1 is active and R2 is standby. They exchange hellos; if R1 fails, R2 takes over the virtual IP and MAC.">
+      <Node x={20} y={110} w={130} h={50} label="PC" sub="gw 192.168.1.254" kind="end" />
+      <Node x={250} y={110} w={90} h={50} label="Switch" kind="mid" />
+      <Node x={440} y={30} w={130} h={56} label="R1 (Active)" sub="192.168.1.2" kind="ok" />
+      <Node x={440} y={180} w={130} h={56} label="R2 (Standby)" sub="192.168.1.3" kind="warn" />
+      <Link x1={150} y1={135} x2={250} y2={135} />
+      <Link x1={340} y1={125} x2={440} y2={58} />
+      <Link x1={340} y1={145} x2={440} y2={208} />
+      <Link x1={505} y1={86} x2={505} y2={180} dashed />
+      <text className="d-sub" x={520} y={140}>hello 3s / hold 10s</text>
+      <Node x={600} y={100} w={110} h={60} label="Virtual IP" sub=".254" kind="default" />
+      <text className="d-sub" x={20} y={254}>HSRP = Cisco · VRRP = open · GLBP = may load balancing</text>
+    </Svg>
+  );
+}
+
+function QosPipeline() {
+  const S = [['Classify', 'ano ang packet?', 'end'], ['Mark', 'DSCP / CoS', 'warn'], ['Queue', 'LLQ / CBWFQ', 'mid'], ['WRED', 'iwas congestion', 'mid'], ['Police / Shape', 'limitahan ang rate', 'ok']] as const;
+  return (
+    <Svg viewBox="0 0 720 220" title="QoS pipeline" desc="Traffic is classified, marked, queued, protected from congestion with WRED, and then policed or shaped to a rate before leaving the interface.">
+      {S.map(([n, sub, kind], i) => (
+        <g key={n}>
+          <Node x={6 + i * 144} y={70} w={132} h={60} label={n} sub={sub} kind={kind} />
+          {i < S.length - 1 && <Link x1={138 + i * 144} y1={100} x2={150 + i * 144} y2={100} />}
+        </g>
+      ))}
+      <text className="d-sub" x={10} y={170}>Voice = DSCP EF (46) sa LLQ · Best effort = 0</text>
+      <text className="d-sub" x={10} y={194}>Policing = drop sobra · Shaping = buffer/delay (outbound)</text>
+    </Svg>
+  );
+}
+
+function WlanChannels() {
+  return (
+    <Svg viewBox="0 0 720 260" title="2.4 GHz non-overlapping channels and band comparison" desc="In the 2.4 GHz band, channels 1, 6 and 11 do not overlap. The 2.4 GHz band has longer range but more interference; 5 GHz is faster and cleaner with shorter range.">
+      <text className="d-title" x={20} y={24}>2.4 GHz: channel 1, 6, 11 lang</text>
+      <Node x={20} y={40} w={160} h={44} label="Channel 1" kind="ok" />
+      <Node x={210} y={40} w={160} h={44} label="Channel 6" kind="ok" />
+      <Node x={400} y={40} w={160} h={44} label="Channel 11" kind="ok" />
+      <rect className="d-box-danger" x={590} y={40} width={110} height={44} rx={8} />
+      <text className="d-sub" x={645} y={66} textAnchor="middle">2-5, 7-10 overlap</text>
+      <Node x={20} y={120} w={320} h={60} label="2.4 GHz" sub="malayo ang abot · siksikan · tumatagos sa pader" kind="warn" />
+      <Node x={380} y={120} w={320} h={60} label="5 GHz" sub="mabilis · malinis · mas maikli ang abot" kind="mid" />
+      <text className="d-sub" x={20} y={214}>SSID = pangalan · BSSID = MAC ng AP radio</text>
+      <text className="d-sub" x={20} y={238}>CSMA/CA: makinig muna, saka magpadala</text>
+    </Svg>
+  );
+}
+
+function WirelessSecurityLadder() {
+  const S = [['Open', 'walang proteksyon', 'danger'], ['WEP', 'sira', 'danger'], ['WPA', 'TKIP', 'warn'], ['WPA2', 'AES-CCMP', 'ok'], ['WPA3', 'SAE', 'ok']] as const;
+  return (
+    <Svg viewBox="0 0 720 250" title="Wi-Fi security ladder" desc="Wi-Fi security improved from open networks and broken WEP, through WPA with TKIP, to WPA2 with AES-CCMP and WPA3 with SAE. Personal mode uses a shared key; enterprise mode uses 802.1X with RADIUS.">
+      {S.map(([n, sub, kind], i) => (
+        <Node key={n} x={10 + i * 142} y={30} w={130} h={60} label={n} sub={sub} kind={kind} />
+      ))}
+      <Node x={30} y={130} w={300} h={60} label="Personal (PSK)" sub="iisang shared password · bahay" kind="end" />
+      <Node x={370} y={130} w={320} h={60} label="Enterprise (802.1X)" sub="RADIUS · bawat user may login" kind="mid" />
+      <text className="d-sub" x={20} y={228}>Evil twin = pekeng AP · Rogue AP = hindi awtorisadong AP</text>
+    </Svg>
+  );
+}
+
 const DIAGRAMS: Record<DiagramId, () => ReactNode> = {
   'ios-modes': IosModes,
   'media-compare': MediaCompare,
@@ -1352,6 +1452,12 @@ const DIAGRAMS: Record<DiagramId, () => ReactNode> = {
   'routing-protocol-types': RoutingProtocolTypes,
   'ospf-states': OspfStates,
   'ospf-topology': OspfTopology,
+  'ospf-adjacency-checklist': OspfAdjacencyChecklist,
+  'ospf-dr-election': OspfDrElection,
+  'fhrp-virtual-gateway': FhrpVirtualGateway,
+  'qos-pipeline': QosPipeline,
+  'wlan-channels': WlanChannels,
+  'wireless-security-ladder': WirelessSecurityLadder,
 };
 
 export function DiagramView({ id, caption }: { id: DiagramId; caption: string }) {

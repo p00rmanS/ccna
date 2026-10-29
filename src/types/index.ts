@@ -62,7 +62,13 @@ export type DiagramId =
   | 'default-route-stub'
   | 'routing-protocol-types'
   | 'ospf-states'
-  | 'ospf-topology';
+  | 'ospf-topology'
+  | 'ospf-adjacency-checklist'
+  | 'ospf-dr-election'
+  | 'fhrp-virtual-gateway'
+  | 'qos-pipeline'
+  | 'wlan-channels'
+  | 'wireless-security-ladder';
 
 export type InteractiveId =
   | 'guess-device'
