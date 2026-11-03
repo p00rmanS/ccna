@@ -16,6 +16,7 @@ import * as iosFundamentals from './lessons/ios-fundamentals';
 import * as cablingPhysical from './lessons/cabling-physical';
 import * as subnettingFromZero from './lessons/subnetting-from-zero';
 import * as vlsm from './lessons/vlsm';
+import * as subnettingDeepDive from './lessons/subnetting-deep-dive';
 import * as ipv6Fundamentals from './lessons/ipv6-fundamentals';
 import * as ipv6AddressTypes from './lessons/ipv6-address-types';
 import * as vlans from './lessons/vlans';
@@ -72,7 +73,7 @@ interface LessonBundle {
 
 const BUNDLES: LessonBundle[] = [
   whatIsANetwork, networkDevices, lanVsWan, osiModel, tcpipModel, ethernet, macAddresses, switchMacLearning, binaryBasics, ipv4Fundamentals,
-  iosFundamentals, cablingPhysical, subnettingFromZero, vlsm, ipv6Fundamentals, ipv6AddressTypes,
+  iosFundamentals, cablingPhysical, subnettingFromZero, subnettingDeepDive, vlsm, ipv6Fundamentals, ipv6AddressTypes,
   vlans, trunking, interVlanRouting, whyStp, stpFundamentals, rapidPvst, stpProtection,
   etherchannel, cdpLldp, dhcpFundamentals, dhcpServerRelay,
   dns, natFundamentals, natStaticDynamic, patOverload,

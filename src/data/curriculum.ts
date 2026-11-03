@@ -42,7 +42,7 @@ export const CURRICULUM: PhaseOutline[] = [
       { id: '1.9', title: 'Binary Fundamentals', domain: 'D1', lessonIds: ['binary-basics'], topics: [] },
       { id: '1.10', title: 'IPv4 Addressing', domain: 'D1', lessonIds: ['ipv4-fundamentals'], topics: [] },
       { id: '1.11', title: 'Subnetting From Zero', domain: 'D1', lessonIds: ['subnetting-from-zero'], topics: ['Why subnet', 'CIDR and block size', 'Why the shortcut works'], note: 'Practise now in the Subnetting trainer.' },
-      { id: '1.12', title: 'Subnetting Drills', domain: 'D1', lessonIds: [], topics: ['Unlimited generated drills'], note: 'Available now as the Subnetting trainer.' },
+      { id: '1.12', title: 'Subnetting Drills', domain: 'D1', lessonIds: ['subnetting-deep-dive'], topics: ['Unlimited generated drills'], note: 'Available now as the Subnetting trainer.' },
       { id: '1.13', title: 'VLSM', domain: 'D1', lessonIds: ['vlsm'], topics: ['Allocating networks by host count', 'Route summarisation preview'] },
       { id: '1.14', title: 'IPv6 Fundamentals', domain: 'D1', lessonIds: ['ipv6-fundamentals'], topics: ['128-bit notation', 'Zero compression', 'Prefix length', 'Modified EUI-64'] },
       { id: '1.15', title: 'IPv6 Address Types', domain: 'D1', lessonIds: ['ipv6-address-types'], topics: ['Global unicast', 'Link-local', 'Unique local', 'Multicast and anycast'] },
