@@ -27,6 +27,33 @@ function Hook({ section }: { section: Extract<Section, { type: 'hook' }> }) {
   );
 }
 
+function RememberView({ section }: { section: Extract<Section, { type: 'remember' }> }) {
+  return (
+    <aside className="remember" aria-label="Exam alert">
+      <div className="remember-tag"><span aria-hidden="true">!</span> Tandaan sa exam</div>
+      {section.title && <h3>{section.title}</h3>}
+      <ul>{section.items.map((it, i) => <li key={i}><Rich text={it} /></li>)}</ul>
+    </aside>
+  );
+}
+
+function DeepDiveView({ section }: { section: Extract<Section, { type: 'deepdive' }> }) {
+  return (
+    <section className="lesson-block deepdive">
+      <div className="story-eyebrow">Mas malalim</div>
+      <h2>{section.title}</h2>
+      {section.paragraphs.map((p, i) => <p key={i}><Rich text={p} /></p>)}
+      {section.steps && <ol className="steps">{section.steps.map((s, i) => <li key={i}><Rich text={s} /></li>)}</ol>}
+      {section.tricks && (
+        <div className="tricks">
+          <div className="tricks-title">Tips at tricks</div>
+          <ul>{section.tricks.map((t, i) => <li key={i}><Rich text={t} /></li>)}</ul>
+        </div>
+      )}
+    </section>
+  );
+}
+
 function StoryView({ section }: { section: Extract<Section, { type: 'story' }> }) {
   return (
     <section className="lesson-block story" aria-labelledby="story-h">
@@ -99,6 +126,10 @@ export function SectionView({ section }: { section: Section }) {
   switch (section.type) {
     case 'explain':
       return <Explain section={section} />;
+    case 'remember':
+      return <RememberView section={section} />;
+    case 'deepdive':
+      return <DeepDiveView section={section} />;
     case 'story':
       return <StoryView section={section} />;
     case 'analogy':

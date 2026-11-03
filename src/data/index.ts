@@ -1,6 +1,7 @@
 import type { Flashcard, Lab, Lesson, ModuleOutline, Question } from '../types';
 import { CURRICULUM, allModules } from './curriculum';
 import { applyTaglish } from './taglish';
+import { applyRemember } from './remember';
 import * as whatIsANetwork from './lessons/what-is-a-network';
 import * as networkDevices from './lessons/network-devices';
 import * as lanVsWan from './lessons/lan-vs-wan';
@@ -87,7 +88,10 @@ const BUNDLES: LessonBundle[] = [
 
 const ALL_QUESTIONS = BUNDLES.flatMap((b) => b.questions);
 const ALL_CARDS = BUNDLES.flatMap((b) => b.flashcards);
-for (const b of BUNDLES) applyTaglish(b.lesson, ALL_QUESTIONS, ALL_CARDS, b.lab);
+for (const b of BUNDLES) {
+  applyTaglish(b.lesson, ALL_QUESTIONS, ALL_CARDS, b.lab);
+  applyRemember(b.lesson);
+}
 
 const byId = new Map(BUNDLES.map((b) => [b.lesson.id, b.lesson]));
 

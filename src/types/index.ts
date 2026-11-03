@@ -99,6 +99,10 @@ export type Section =
   /** The single easiest memory trick for the lesson, explained in Taglish, with a self-test. */
   /** A short Taglish narrative with recurring characters that ties the concept to a real situation. */
   | { type: 'story'; title: string; paragraphs: string[]; moral: string }
+  /** Exam-alert card: short facts that are likely to appear on the exam. */
+  | { type: 'remember'; title?: string; items: string[] }
+  /** Long-form walkthrough: step-by-step reasoning, worked examples and practical tricks. */
+  | { type: 'deepdive'; title: string; paragraphs: string[]; steps?: string[]; tricks?: string[] }
   | { type: 'hook'; title: string; trick: string; taglish: string[]; test: { question: string; answer: string } }
   | { type: 'diagram'; id: DiagramId; caption: string }
   | { type: 'interactive'; id: InteractiveId; caption?: string }
