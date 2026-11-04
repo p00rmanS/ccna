@@ -16,6 +16,11 @@ import * as iosFundamentals from './lessons/ios-fundamentals';
 import * as cablingPhysical from './lessons/cabling-physical';
 import * as subnettingFromZero from './lessons/subnetting-from-zero';
 import * as vlsm from './lessons/vlsm';
+import * as stpDeepDive from './lessons/stp-deep-dive';
+import * as vlanTrunkDeepDive from './lessons/vlan-trunk-deep-dive';
+import * as ospfDeepDive from './lessons/ospf-deep-dive';
+import * as aclDeepDive from './lessons/acl-deep-dive';
+import * as natDeepDive from './lessons/nat-deep-dive';
 import * as subnettingDeepDive from './lessons/subnetting-deep-dive';
 import * as ipv6Fundamentals from './lessons/ipv6-fundamentals';
 import * as ipv6AddressTypes from './lessons/ipv6-address-types';
@@ -85,6 +90,7 @@ const BUNDLES: LessonBundle[] = [
   routerForwarding, routingTable, staticRoutes, defaultRoutes,
   dynamicRouting, ospfFundamentals, ospfConfig,
   ospfNeighbors, ospfDrBdr, fhrp, qos, wirelessFundamentals, wirelessSecurity,
+  stpDeepDive, vlanTrunkDeepDive, ospfDeepDive, aclDeepDive, natDeepDive,
 ];
 
 const ALL_QUESTIONS = BUNDLES.flatMap((b) => b.questions);
