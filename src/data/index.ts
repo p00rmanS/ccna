@@ -21,6 +21,18 @@ import * as vlanTrunkDeepDive from './lessons/vlan-trunk-deep-dive';
 import * as ospfDeepDive from './lessons/ospf-deep-dive';
 import * as aclDeepDive from './lessons/acl-deep-dive';
 import * as natDeepDive from './lessons/nat-deep-dive';
+import * as ipv6Configuration from './lessons/ipv6-configuration';
+import * as ipv6StaticRouting from './lessons/ipv6-static-routing';
+import * as wirelessArchitectures from './lessons/wireless-architectures';
+import * as networkAutomation from './lessons/network-automation';
+import * as controllerSdn from './lessons/controller-sdn';
+import * as restApis from './lessons/rest-apis';
+import * as jsonData from './lessons/json-data';
+import * as ansibleTerraform from './lessons/ansible-terraform';
+import * as aiMlNetworkOps from './lessons/ai-ml-network-ops';
+import * as securityPrograms from './lessons/security-programs';
+import * as aclPlacement from './lessons/acl-placement';
+import * as virtualizationClientIp from './lessons/virtualization-client-ip';
 import * as subnettingDeepDive from './lessons/subnetting-deep-dive';
 import * as ipv6Fundamentals from './lessons/ipv6-fundamentals';
 import * as ipv6AddressTypes from './lessons/ipv6-address-types';
@@ -91,6 +103,7 @@ const BUNDLES: LessonBundle[] = [
   dynamicRouting, ospfFundamentals, ospfConfig,
   ospfNeighbors, ospfDrBdr, fhrp, qos, wirelessFundamentals, wirelessSecurity,
   stpDeepDive, vlanTrunkDeepDive, ospfDeepDive, aclDeepDive, natDeepDive,
+  ipv6Configuration, ipv6StaticRouting, wirelessArchitectures, networkAutomation, controllerSdn, restApis, jsonData, ansibleTerraform, aiMlNetworkOps, securityPrograms, aclPlacement, virtualizationClientIp,
 ];
 
 const ALL_QUESTIONS = BUNDLES.flatMap((b) => b.questions);

@@ -1368,6 +1368,145 @@ function QosPipeline() {
   );
 }
 
+function WlcCapwap() {
+  return (
+    <Svg viewBox="0 0 720 260" title="Lightweight access points and a WLC" desc="Lightweight access points build CAPWAP tunnels to a wireless LAN controller. Control traffic uses UDP 5246 and data uses UDP 5247. The controller handles management and the AP handles the radio.">
+      <Node x={270} y={20} w={180} h={56} label="WLC" sub="policy · RRM · roaming" kind="mid" />
+      <Node x={40} y={150} w={130} h={56} label="Lightweight AP 1" sub="radio lang" kind="end" />
+      <Node x={295} y={150} w={130} h={56} label="Lightweight AP 2" sub="radio lang" kind="end" />
+      <Node x={550} y={150} w={130} h={56} label="Lightweight AP 3" sub="radio lang" kind="end" />
+      <Link x1={105} y1={150} x2={300} y2={76} />
+      <Link x1={360} y1={150} x2={360} y2={76} />
+      <Link x1={615} y1={150} x2={420} y2={76} />
+      <text className="d-sub" x={20} y={232}>CAPWAP tunnel: UDP 5246 (control) · UDP 5247 (data)</text>
+      <text className="d-sub" x={20} y={250}>Split MAC: AP = real-time (beacons, frames) · WLC = management</text>
+    </Svg>
+  );
+}
+
+function RestCrud() {
+  const R = [['POST', 'Create', 'ok'], ['GET', 'Read', 'end'], ['PUT / PATCH', 'Update', 'warn'], ['DELETE', 'Delete', 'danger']] as const;
+  return (
+    <Svg viewBox="0 0 720 230" title="REST verbs and CRUD" desc="HTTP verbs map to CRUD operations: POST creates, GET reads, PUT or PATCH updates and DELETE removes a resource. Success is usually 200, 201 or 204; client errors are 4xx; server errors are 5xx.">
+      {R.map(([v, c, kind], i) => (
+        <Node key={v} x={10 + i * 176} y={30} w={162} h={64} label={v} sub={c} kind={kind} />
+      ))}
+      <text className="d-sub" x={10} y={140}>2xx = tagumpay (200 OK, 201 Created, 204 No Content)</text>
+      <text className="d-sub" x={10} y={164}>4xx = mali ang client (400, 401, 403, 404)</text>
+      <text className="d-sub" x={10} y={188}>5xx = mali ang server (500, 503)</text>
+    </Svg>
+  );
+}
+
+function Ipv6NdFlow() {
+  return (
+    <Svg viewBox="0 0 720 240" title="IPv6 neighbour discovery and SLAAC" desc="A host sends a router solicitation to ff02::2. The router answers with a router advertisement containing the prefix. The host builds its own address, then checks it is unique with duplicate address detection using neighbour solicitation.">
+      <Node x={30} y={40} w={150} h={56} label="Host" sub="fe80::/10 link-local" kind="end" />
+      <Node x={540} y={40} w={150} h={56} label="Router" sub="ipv6 unicast-routing" kind="mid" />
+      <Link x1={180} y1={60} x2={540} y2={60} />
+      <text className="d-sub" x={200} y={54}>1. RS → ff02::2 (may router ba?)</text>
+      <Link x1={540} y1={80} x2={180} y2={80} />
+      <text className="d-sub" x={200} y={102}>2. RA → prefix 2001:db8:1::/64</text>
+      <text className="d-sub" x={30} y={150}>3. Host = prefix + interface ID (EUI-64 o random)</text>
+      <text className="d-sub" x={30} y={174}>4. DAD: NS sa sarili niyang address; walang sagot = unique</text>
+      <text className="d-sub" x={30} y={198}>NS/NA = ARP ng IPv6 · multicast ff02::1:ffXX:XXXX</text>
+    </Svg>
+  );
+}
+
+function SdnPlanes() {
+  return (
+    <Svg viewBox="0 0 720 280" title="SDN planes and APIs" desc="A controller holds the control plane and the management plane. Applications talk to the controller through the northbound API, usually REST. The controller programs the network devices through southbound APIs such as NETCONF, RESTCONF, OpenFlow or CLI. Devices keep the data plane.">
+      <Node x={240} y={10} w={240} h={44} label="Applications" sub="scripts, dashboards" kind="end" />
+      <text className="d-sub" x={500} y={80}>Northbound API (REST)</text>
+      <Link x1={360} y1={54} x2={360} y2={96} />
+      <Node x={210} y={96} w={300} h={60} label="SDN Controller" sub="control + management plane" kind="mid" />
+      <text className="d-sub" x={440} y={184}>Southbound API (NETCONF, RESTCONF, OpenFlow)</text>
+      <Link x1={290} y1={156} x2={130} y2={196} />
+      <Link x1={430} y1={156} x2={590} y2={196} />
+      <Node x={40} y={196} w={180} h={50} label="Switch" sub="data plane" kind="ok" />
+      <Node x={500} y={196} w={180} h={50} label="Router" sub="data plane" kind="ok" />
+      <text className="d-sub" x={10} y={272}>Control = desisyon · Data = pagpapasa · Management = configuration</text>
+    </Svg>
+  );
+}
+
+function JsonAnatomy() {
+  return (
+    <Svg viewBox="0 0 720 260" title="Anatomy of a JSON object" desc="A JSON object is wrapped in curly braces and holds key-value pairs separated by commas. Keys are strings in double quotes. Values can be strings, numbers, booleans, null, arrays in square brackets or nested objects.">
+      <rect className="d-box" x={20} y={20} width={400} height={200} rx={10} />
+      <text className="d-text" x={40} y={50} textAnchor="start">{'{'}</text>
+      <text className="d-sub" x={60} y={78}>"hostname": "R1",  (string)</text>
+      <text className="d-sub" x={60} y={102}>"uptime": 3600,  (number)</text>
+      <text className="d-sub" x={60} y={126}>"up": true,  (boolean)</text>
+      <text className="d-sub" x={60} y={150}>"interfaces": ["Gi0/0", "Gi0/1"],  (array)</text>
+      <text className="d-sub" x={60} y={174}>"location": {'{'} "site": "HQ" {'}'}  (object)</text>
+      <text className="d-text" x={40} y={206} textAnchor="start">{'}'}</text>
+      <Node x={450} y={30} w={250} h={44} label="{ } object" sub="key : value pairs" kind="mid" />
+      <Node x={450} y={90} w={250} h={44} label="[ ] array" sub="ordered list" kind="end" />
+      <Node x={450} y={150} w={250} h={52} label="Keys = string sa quotes" sub="values = string, number, bool, null" kind="warn" />
+    </Svg>
+  );
+}
+
+function IacFlow() {
+  const S = [['Code', 'playbook / .tf', 'end'], ['Plan', 'ano ang magbabago?', 'warn'], ['Apply', 'ilapat sa devices', 'mid'], ['Verify', 'idempotent', 'ok']] as const;
+  return (
+    <Svg viewBox="0 0 720 230" title="Infrastructure as code workflow" desc="Desired state is written as code, previewed, applied to devices and verified. Ansible is agentless and push-based using SSH and YAML playbooks. Terraform describes infrastructure declaratively and keeps a state file.">
+      {S.map(([n, sub, kind], i) => (
+        <g key={n}>
+          <Node x={10 + i * 176} y={30} w={156} h={60} label={n} sub={sub} kind={kind} />
+          {i < S.length - 1 && <Link x1={166 + i * 176} y1={60} x2={186 + i * 176} y2={60} />}
+        </g>
+      ))}
+      <text className="d-sub" x={10} y={140}>Ansible: agentless · YAML playbooks · SSH · push</text>
+      <text className="d-sub" x={10} y={164}>Terraform: declarative · HCL · state file · provisioning</text>
+      <text className="d-sub" x={10} y={188}>Idempotent = ulitin nang ulitin, pareho ang resulta</text>
+    </Svg>
+  );
+}
+
+function VirtStack() {
+  return (
+    <Svg viewBox="0 0 720 260" title="Virtual machines versus containers" desc="Virtual machines each include a guest operating system on top of a hypervisor. Containers share the host operating system kernel and run on a container engine, so they are lighter and start faster.">
+      <text className="d-title" x={20} y={24}>Virtual machines</text>
+      <Node x={20} y={36} w={90} h={44} label="App" kind="end" />
+      <Node x={120} y={36} w={90} h={44} label="App" kind="end" />
+      <Node x={20} y={86} w={90} h={36} label="Guest OS" kind="warn" />
+      <Node x={120} y={86} w={90} h={36} label="Guest OS" kind="warn" />
+      <Node x={20} y={130} w={190} h={36} label="Hypervisor" kind="mid" />
+      <Node x={20} y={172} w={190} h={36} label="Hardware" kind="default" />
+      <text className="d-title" x={290} y={24}>Containers</text>
+      <Node x={290} y={36} w={90} h={44} label="App" kind="end" />
+      <Node x={390} y={36} w={90} h={44} label="App" kind="end" />
+      <Node x={290} y={86} w={190} h={36} label="Container engine" kind="mid" />
+      <Node x={290} y={130} w={190} h={36} label="Host OS (shared)" kind="warn" />
+      <Node x={290} y={172} w={190} h={36} label="Hardware" kind="default" />
+      <text className="d-sub" x={510} y={60}>VM = buong OS · mabigat</text>
+      <text className="d-sub" x={510} y={84}>Container = shared kernel · magaan</text>
+      <text className="d-sub" x={510} y={108}>VRF = hiwalay na routing table</text>
+      <text className="d-sub" x={20} y={240}>Type 1 hypervisor = diretso sa hardware · Type 2 = nasa ibabaw ng OS</text>
+    </Svg>
+  );
+}
+
+function AiOpsLoop() {
+  const S = [['Data', 'telemetry, logs', 'end'], ['Model', 'ML / AI', 'mid'], ['Insight', 'prediction / hula', 'warn'], ['Human check', 'i-verify', 'ok']] as const;
+  return (
+    <Svg viewBox="0 0 720 220" title="AI and ML in network operations" desc="Telemetry and logs feed a machine learning model. Predictive AI forecasts failures or anomalies; generative AI creates text, configuration or summaries. A human must verify the output before it is applied.">
+      {S.map(([n, sub, kind], i) => (
+        <g key={n}>
+          <Node x={10 + i * 176} y={30} w={156} h={60} label={n} sub={sub} kind={kind} />
+          {i < S.length - 1 && <Link x1={166 + i * 176} y1={60} x2={186 + i * 176} y2={60} />}
+        </g>
+      ))}
+      <text className="d-sub" x={10} y={140}>Predictive AI: hinuhulaan ang susunod (pagkasira, anomalya)</text>
+      <text className="d-sub" x={10} y={164}>Generative AI: gumagawa ng bago (text, config, buod)</text>
+      <text className="d-sub" x={10} y={188}>Laging i-verify bago ilapat sa production</text>
+    </Svg>
+  );
+}
+
 function WlanChannels() {
   return (
     <Svg viewBox="0 0 720 260" title="2.4 GHz non-overlapping channels and band comparison" desc="In the 2.4 GHz band, channels 1, 6 and 11 do not overlap. The 2.4 GHz band has longer range but more interference; 5 GHz is faster and cleaner with shorter range.">
@@ -1458,6 +1597,14 @@ const DIAGRAMS: Record<DiagramId, () => ReactNode> = {
   'qos-pipeline': QosPipeline,
   'wlan-channels': WlanChannels,
   'wireless-security-ladder': WirelessSecurityLadder,
+  'wlc-capwap': WlcCapwap,
+  'rest-crud': RestCrud,
+  'ipv6-nd-flow': Ipv6NdFlow,
+  'sdn-planes': SdnPlanes,
+  'json-anatomy': JsonAnatomy,
+  'iac-flow': IacFlow,
+  'virt-stack': VirtStack,
+  'ai-ops-loop': AiOpsLoop,
 };
 
 export function DiagramView({ id, caption }: { id: DiagramId; caption: string }) {

@@ -68,7 +68,15 @@ export type DiagramId =
   | 'fhrp-virtual-gateway'
   | 'qos-pipeline'
   | 'wlan-channels'
-  | 'wireless-security-ladder';
+  | 'wireless-security-ladder'
+  | 'wlc-capwap'
+  | 'rest-crud'
+  | 'ipv6-nd-flow'
+  | 'sdn-planes'
+  | 'json-anatomy'
+  | 'iac-flow'
+  | 'virt-stack'
+  | 'ai-ops-loop';
 
 export type InteractiveId =
   | 'guess-device'
