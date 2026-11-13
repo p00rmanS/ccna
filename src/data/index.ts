@@ -33,6 +33,12 @@ import * as aiMlNetworkOps from './lessons/ai-ml-network-ops';
 import * as securityPrograms from './lessons/security-programs';
 import * as aclPlacement from './lessons/acl-placement';
 import * as virtualizationClientIp from './lessons/virtualization-client-ip';
+import * as dhcpDnsDeepDive from './lessons/dhcp-dns-deep-dive';
+import * as l2SecurityDeepDive from './lessons/l2-security-deep-dive';
+import * as etherchannelDeepDive from './lessons/etherchannel-deep-dive';
+import * as hsrpDeepDive from './lessons/hsrp-deep-dive';
+import * as mgmtProtocolsDeepDive from './lessons/mgmt-protocols-deep-dive';
+import * as wlcGuiConfig from './lessons/wlc-gui-config';
 import * as subnettingDeepDive from './lessons/subnetting-deep-dive';
 import * as ipv6Fundamentals from './lessons/ipv6-fundamentals';
 import * as ipv6AddressTypes from './lessons/ipv6-address-types';
@@ -104,6 +110,7 @@ const BUNDLES: LessonBundle[] = [
   ospfNeighbors, ospfDrBdr, fhrp, qos, wirelessFundamentals, wirelessSecurity,
   stpDeepDive, vlanTrunkDeepDive, ospfDeepDive, aclDeepDive, natDeepDive,
   ipv6Configuration, ipv6StaticRouting, wirelessArchitectures, networkAutomation, controllerSdn, restApis, jsonData, ansibleTerraform, aiMlNetworkOps, securityPrograms, aclPlacement, virtualizationClientIp,
+  dhcpDnsDeepDive, l2SecurityDeepDive, etherchannelDeepDive, hsrpDeepDive, mgmtProtocolsDeepDive, wlcGuiConfig,
 ];
 
 const ALL_QUESTIONS = BUNDLES.flatMap((b) => b.questions);
