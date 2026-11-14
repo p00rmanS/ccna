@@ -5,7 +5,7 @@ const ID = 'wireless-fundamentals';
 export const lesson: Lesson = {
   id: ID,
   moduleId: '2.12',
-  domain: 'D2',
+  domain: 'D1',
   title: 'Wireless Fundamentals: SSID, BSSID, Channels and Bands',
   description: 'How Wi-Fi works at a basic level: access points, SSID and BSSID, the 2.4 GHz and 5 GHz bands, non-overlapping channels and why signals interfere.',
   whyMatters:
@@ -20,7 +20,7 @@ export const lesson: Lesson = {
   estimatedMinutes: 35,
   difficulty: 'beginner',
   keywords: ['wireless', 'WLAN', 'SSID', 'BSSID', 'BSS', 'ESS', 'access point', '2.4 GHz', '5 GHz', 'channel', '1 6 11', 'CSMA/CA', '802.11', 'interference', 'roaming'],
-  examObjectives: ['2.7'],
+  examObjectives: ['1.11'],
   sections: [
     {
       type: 'explain',
@@ -104,6 +104,26 @@ export const lesson: Lesson = {
         'Habang naglalakad, kumokonekta ang phone sa mas malakas na AP na may parehong SSID (roaming).',
       ],
     },
+    {
+      type: 'deepdive',
+      title: 'RF at encryption (syllabus 1.11.c at 1.11.d)',
+      paragraphs: [
+        'Ang **RF (radio frequency)** ay ang mga radio wave na dinadala ng Wi-Fi. Mga batayang konsepto: **frequency** (bilang ng ikot bawat segundo, sinusukat sa Hz; 2.4 GHz at 5 GHz ang karaniwan), **wavelength** (mas mataas ang frequency = mas maikli ang wavelength = mas mahina tumagos sa pader), **amplitude/power** (lakas ng signal, sinusukat sa **dBm**) at **channel width** (20, 40, 80 o 160 MHz — mas malapad = mas mabilis pero mas kaunti ang non-overlapping channel).',
+        'Ang signal ay humihina habang lumalayo (**attenuation**) at pagdaan sa pader o tubig. Ang **interference** ay galing sa ibang AP sa parehong channel, microwave, Bluetooth at iba pa. Ang **dBm** ay negatibong numero: **-50 dBm = malakas**, **-70 dBm = katanggap-tanggap**, **-85 dBm = mahina**. Mas malapit sa 0 = mas malakas.',
+        'Ang **encryption** ay nagtatago ng laman ng wireless frames dahil ang hangin ay shared media — kahit sino ay makakapakinig. Ang mga uri: **Open** (walang proteksyon), **WEP** (sira), **WPA** (TKIP), **WPA2** (**AES-CCMP**) at **WPA3** (**SAE**, mas matibay laban sa pag-hula ng password). Ang detalye ay nasa lesson na **Wireless Security**; para sa 1.11.d, tandaan na ang encryption ay para sa **kumpidensyalidad ng over-the-air data**.',
+      ],
+      steps: [
+        'Pumili ng band (2.4 o 5 GHz) at channel width.',
+        'Pumili ng non-overlapping channels (1, 6, 11 sa 2.4 GHz).',
+        'Suriin ang signal strength (dBm) sa coverage area.',
+        'I-enable ang WPA2/WPA3 encryption sa WLAN.',
+      ],
+      tricks: [
+        'Mas mataas na frequency = mas mabilis pero mas maikli ang abot.',
+        '-50 dBm ay mas malakas kaysa -80 dBm (mas malapit sa 0 ang mas malakas).',
+        'Ang malapad na channel (80 MHz) sa 2.4 GHz ay hindi praktikal dahil kakaunti ang channel.',
+      ],
+    },
     { type: 'callout', kind: 'trap', text: 'Ang **SSID ay pangalan** at **puwedeng pareho sa maraming AP**; ang **BSSID ay MAC address** at **natatangi sa bawat AP radio**. Madalas itong pagpalitin.' },
     { type: 'callout', kind: 'trap', text: 'Ang **5 GHz ay mas mabilis pero mas maikli ang abot**; ang **2.4 GHz ay mas malayo pero mas siksikan**. Kapag tinanong kung **alin ang mas tumatagos sa pader**, **2.4 GHz**.' },
     { type: 'callout', kind: 'tip', text: 'Sa **2.4 GHz**, **huwag gumamit ng channel 2–5 o 7–10** kung may kalapit na AP — **nag-ooverlap**. **1, 6, 11 lang**.' },
@@ -164,55 +184,55 @@ Clients per AP: 38, 41, 35`,
 
 export const questions: Question[] = [
   {
-    id: `${ID}-q1`, lessonIds: [ID], domain: 'D2', objective: '2.7', difficulty: 'easy', type: 'single',
+    id: `${ID}-q1`, lessonIds: [ID], domain: 'D1', objective: '1.11', difficulty: 'easy', type: 'single',
     prompt: 'What is an SSID?',
     choices: ['The MAC address of an AP', 'The name of a wireless network', 'A channel number', 'An encryption key'], correct: [1],
     explanation: 'The SSID is the human-readable name of the wireless network.',
   },
   {
-    id: `${ID}-q2`, lessonIds: [ID], domain: 'D2', objective: '2.7', difficulty: 'easy', type: 'single',
+    id: `${ID}-q2`, lessonIds: [ID], domain: 'D1', objective: '1.11', difficulty: 'easy', type: 'single',
     prompt: 'Which 2.4 GHz channels do not overlap?',
     choices: ['1, 2, 3', '1, 6, 11', '2, 5, 8', '3, 7, 12'], correct: [1],
     explanation: 'Channels 1, 6 and 11 are the non-overlapping set in the 2.4 GHz band.',
   },
   {
-    id: `${ID}-q3`, lessonIds: [ID], domain: 'D2', objective: '2.7', difficulty: 'medium', type: 'single',
+    id: `${ID}-q3`, lessonIds: [ID], domain: 'D1', objective: '1.11', difficulty: 'medium', type: 'single',
     prompt: 'How does 5 GHz compare with 2.4 GHz?',
     choices: ['Longer range, slower', 'Faster and less crowded but shorter range', 'Identical', 'Only for older devices'], correct: [1],
     explanation: '5 GHz offers higher speed and more channels but shorter range.',
   },
   {
-    id: `${ID}-q4`, lessonIds: [ID], domain: 'D2', objective: '2.7', difficulty: 'medium', type: 'single',
+    id: `${ID}-q4`, lessonIds: [ID], domain: 'D1', objective: '1.11', difficulty: 'medium', type: 'single',
     prompt: 'What is the BSSID?',
     choices: ['The network name', 'The MAC address of the AP radio', 'The IP address of the AP', 'The WPA key'], correct: [1],
     explanation: 'The BSSID identifies a BSS and is the MAC address of the AP radio.',
   },
   {
-    id: `${ID}-q5`, lessonIds: [ID], domain: 'D2', objective: '2.7', difficulty: 'medium', type: 'single',
+    id: `${ID}-q5`, lessonIds: [ID], domain: 'D1', objective: '1.11', difficulty: 'medium', type: 'single',
     prompt: 'Which access method does Wi-Fi use?',
     choices: ['CSMA/CD', 'CSMA/CA', 'Token passing', 'Polling only'], correct: [1],
     explanation: 'Wireless uses carrier sense multiple access with collision avoidance.',
   },
   {
-    id: `${ID}-q6`, lessonIds: [ID], domain: 'D2', objective: '2.7', difficulty: 'hard', type: 'single',
+    id: `${ID}-q6`, lessonIds: [ID], domain: 'D1', objective: '1.11', difficulty: 'hard', type: 'single',
     prompt: 'Neighbouring APs all use channel 6 in 2.4 GHz and speeds are low despite strong signal. What is the problem?',
     choices: ['Co-channel interference', 'A wrong SSID', 'Duplex mismatch', 'DHCP failure'], correct: [0],
     explanation: 'APs on the same channel share airtime, reducing throughput.',
   },
   {
-    id: `${ID}-q7`, lessonIds: [ID], domain: 'D2', objective: '2.7', difficulty: 'medium', type: 'single',
+    id: `${ID}-q7`, lessonIds: [ID], domain: 'D1', objective: '1.11', difficulty: 'medium', type: 'single',
     prompt: 'Which standard operates only in the 5 GHz band?',
     choices: ['802.11b', '802.11g', '802.11ac', '802.11n'], correct: [2],
     explanation: '802.11ac (Wi-Fi 5) is 5 GHz; 802.11n supports both bands.',
   },
   {
-    id: `${ID}-q8`, lessonIds: [ID], domain: 'D2', objective: '2.7', difficulty: 'medium', type: 'multiple',
+    id: `${ID}-q8`, lessonIds: [ID], domain: 'D1', objective: '1.11', difficulty: 'medium', type: 'multiple',
     prompt: 'Which TWO statements about 2.4 GHz are true?',
     choices: ['It has longer range than 5 GHz', 'It has more non-overlapping channels than 5 GHz', 'It suffers more from interference', 'It is faster than 5 GHz'], correct: [0, 2],
     explanation: '2.4 GHz travels farther but is more congested and has fewer clean channels.',
   },
   {
-    id: `${ID}-q9`, lessonIds: [ID], domain: 'D2', objective: '2.7', difficulty: 'easy', type: 'true-false',
+    id: `${ID}-q9`, lessonIds: [ID], domain: 'D1', objective: '1.11', difficulty: 'easy', type: 'true-false',
     prompt: 'True or false: several APs can share the same SSID to form an extended service set.',
     choices: ['True', 'False'], correct: [0],
     explanation: 'True — an ESS lets clients roam between APs with one SSID.',
@@ -220,12 +240,12 @@ export const questions: Question[] = [
 ];
 
 export const flashcards: Flashcard[] = [
-  { id: `${ID}-hook`, lessonId: ID, domain: 'D2', category: 'concept', front: 'Pro tip: Wi-Fi basics?', back: 'SSID = pangalan; BSSID = MAC ng AP. 2.4 GHz = malayo, siksikan, channel 1/6/11. 5 GHz = mabilis, malinis, maikli ang abot. CSMA/CA: makinig muna.' },
-  { id: `${ID}-f1`, lessonId: ID, domain: 'D2', category: 'concept', front: 'SSID vs BSSID?', back: 'SSID is the network name; BSSID is the MAC address of the AP radio.' },
-  { id: `${ID}-f2`, lessonId: ID, domain: 'D2', category: 'concept', front: '2.4 GHz vs 5 GHz?', back: '2.4: longer range, more interference, channels 1/6/11. 5: faster, more channels, shorter range.' },
-  { id: `${ID}-f3`, lessonId: ID, domain: 'D2', category: 'concept', front: 'Wi-Fi access method?', back: 'CSMA/CA: listen, random backoff, transmit, wait for ACK; half-duplex shared medium.' },
-  { id: `${ID}-f4`, lessonId: ID, domain: 'D2', category: 'concept', front: '802.11 standards and bands?', back: 'b/g 2.4; a 5; n 2.4+5; ac 5; ax (Wi-Fi 6) 2.4+5 (6E adds 6 GHz).' },
-  { id: `${ID}-f5`, lessonId: ID, domain: 'D2', category: 'concept', front: 'BSS vs ESS?', back: 'BSS: one AP and its clients. ESS: several APs with one SSID for roaming.' },
+  { id: `${ID}-hook`, lessonId: ID, domain: 'D1', category: 'concept', front: 'Pro tip: Wi-Fi basics?', back: 'SSID = pangalan; BSSID = MAC ng AP. 2.4 GHz = malayo, siksikan, channel 1/6/11. 5 GHz = mabilis, malinis, maikli ang abot. CSMA/CA: makinig muna.' },
+  { id: `${ID}-f1`, lessonId: ID, domain: 'D1', category: 'concept', front: 'SSID vs BSSID?', back: 'SSID is the network name; BSSID is the MAC address of the AP radio.' },
+  { id: `${ID}-f2`, lessonId: ID, domain: 'D1', category: 'concept', front: '2.4 GHz vs 5 GHz?', back: '2.4: longer range, more interference, channels 1/6/11. 5: faster, more channels, shorter range.' },
+  { id: `${ID}-f3`, lessonId: ID, domain: 'D1', category: 'concept', front: 'Wi-Fi access method?', back: 'CSMA/CA: listen, random backoff, transmit, wait for ACK; half-duplex shared medium.' },
+  { id: `${ID}-f4`, lessonId: ID, domain: 'D1', category: 'concept', front: '802.11 standards and bands?', back: 'b/g 2.4; a 5; n 2.4+5; ac 5; ax (Wi-Fi 6) 2.4+5 (6E adds 6 GHz).' },
+  { id: `${ID}-f5`, lessonId: ID, domain: 'D1', category: 'concept', front: 'BSS vs ESS?', back: 'BSS: one AP and its clients. ESS: several APs with one SSID for roaming.' },
 ];
 
 export const lab: Lab = {

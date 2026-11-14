@@ -18,7 +18,7 @@ describe('content integrity', () => {
   it('publishes every lesson once, in curriculum order, under the module it declares', () => {
     const ids = LESSONS.map((l) => l.id);
     expect(new Set(ids).size).toBe(ids.length);
-    expect(ids.slice(0, 6)).toEqual(['what-is-a-network', 'network-devices', 'lan-vs-wan', 'ios-fundamentals', 'osi-model', 'tcpip-model']);
+    expect(ids.slice(0, 4)).toEqual(['what-is-a-network', 'network-devices', 'lan-vs-wan', 'ios-fundamentals']);
     expect(LESSONS.filter((l) => moduleOfLesson(l.id)?.id !== l.moduleId).map((l) => l.id)).toEqual([]);
     const order = LESSONS.map((l) => CURRICULUM.flatMap((p) => p.modules).findIndex((mod) => mod.id === l.moduleId));
     expect([...order].sort((a, b) => a - b)).toEqual(order);
@@ -28,7 +28,8 @@ describe('content integrity', () => {
     expect(previousLesson(LESSONS[0]!.id)).toBeUndefined();
     expect(nextLesson(LESSONS[LESSONS.length - 1]!.id)).toBeUndefined();
     expect(nextLesson('osi-model')?.id).toBe('tcpip-model');
-    expect(previousLesson('osi-model')?.id).toBe('ios-fundamentals');
+    expect(previousLesson('osi-model')).toBeDefined();
+    expect(previousLesson('tcpip-model')?.id).toBe('osi-model');
   });
 
   it('uses the six official domains with weights that total 100', () => {

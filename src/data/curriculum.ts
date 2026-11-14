@@ -31,8 +31,8 @@ export const CURRICULUM: PhaseOutline[] = [
     title: 'Phase 1 — Network Fundamentals',
     blurb: 'Models, Ethernet, addressing and subnetting. About 20% of the exam.',
     modules: [
-      { id: '1.1', title: 'Network Components (deep dive)', domain: 'D1', lessonIds: [], topics: ['Layer 3 switching', 'NGFW and IPS placement', 'WLCs and controllers', 'PoE standards'], note: 'The essentials are introduced in “Network Devices” (Module 0.1).' },
-      { id: '1.2', title: 'Network Architectures', domain: 'D1', lessonIds: [], topics: ['Two-tier and three-tier', 'Spine-leaf', 'WAN and SOHO', 'On-premises vs cloud'] },
+      { id: '1.1', title: 'Network Components (deep dive)', domain: 'D1', lessonIds: ['network-components-deep-dive'], topics: ['Layer 3 switching', 'NGFW and IPS placement', 'WLCs and controllers', 'PoE standards'], note: 'The essentials are introduced in “Network Devices” (Module 0.1).' },
+      { id: '1.2', title: 'Network Architectures', domain: 'D1', lessonIds: ['network-architectures'], topics: ['Two-tier and three-tier', 'Spine-leaf', 'WAN and SOHO', 'On-premises vs cloud'] },
       { id: '1.3', title: 'The OSI Model', domain: 'D1', lessonIds: ['osi-model'], topics: [] },
       { id: '1.4', title: 'The TCP/IP Model, TCP and UDP', domain: 'D1', lessonIds: ['tcpip-model'], topics: [] },
       { id: '1.5', title: 'Ethernet Fundamentals', domain: 'D1', lessonIds: ['ethernet'], topics: [] },
@@ -70,6 +70,7 @@ export const CURRICULUM: PhaseOutline[] = [
       { id: '2.13', title: 'Wireless Architectures', domain: 'D2', lessonIds: ['wireless-architectures'], topics: ['Autonomous vs lightweight AP', 'CAPWAP', 'AP modes'] },
       { id: '2.14', title: 'Wireless Security', domain: 'D2', lessonIds: ['wireless-security'], topics: ['WPA2, WPA3', 'PSK vs enterprise', 'RADIUS'] },
       { id: '2.15', title: 'WLC GUI Walkthrough', domain: 'D2', lessonIds: ['wlc-gui-config'], topics: ['WLAN creation', 'Security, VLAN mapping, QoS'] },
+      { id: '2.16', title: 'Device Management Access', domain: 'D2', lessonIds: ['device-management-access'], topics: ['Console, Telnet, SSH, HTTP(S)', 'TACACS+ and RADIUS', 'Cloud-managed devices'], note: 'Exam objective 2.8.' },
     ],
   },
   {

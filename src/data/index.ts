@@ -39,6 +39,9 @@ import * as etherchannelDeepDive from './lessons/etherchannel-deep-dive';
 import * as hsrpDeepDive from './lessons/hsrp-deep-dive';
 import * as mgmtProtocolsDeepDive from './lessons/mgmt-protocols-deep-dive';
 import * as wlcGuiConfig from './lessons/wlc-gui-config';
+import * as networkArchitectures from './lessons/network-architectures';
+import * as networkComponentsDeepDive from './lessons/network-components-deep-dive';
+import * as deviceManagementAccess from './lessons/device-management-access';
 import * as subnettingDeepDive from './lessons/subnetting-deep-dive';
 import * as ipv6Fundamentals from './lessons/ipv6-fundamentals';
 import * as ipv6AddressTypes from './lessons/ipv6-address-types';
@@ -111,6 +114,7 @@ const BUNDLES: LessonBundle[] = [
   stpDeepDive, vlanTrunkDeepDive, ospfDeepDive, aclDeepDive, natDeepDive,
   ipv6Configuration, ipv6StaticRouting, wirelessArchitectures, networkAutomation, controllerSdn, restApis, jsonData, ansibleTerraform, aiMlNetworkOps, securityPrograms, aclPlacement, virtualizationClientIp,
   dhcpDnsDeepDive, l2SecurityDeepDive, etherchannelDeepDive, hsrpDeepDive, mgmtProtocolsDeepDive, wlcGuiConfig,
+  networkArchitectures, networkComponentsDeepDive, deviceManagementAccess,
 ];
 
 const ALL_QUESTIONS = BUNDLES.flatMap((b) => b.questions);

@@ -76,7 +76,8 @@ export type DiagramId =
   | 'json-anatomy'
   | 'iac-flow'
   | 'virt-stack'
-  | 'ai-ops-loop';
+  | 'ai-ops-loop'
+  | 'network-tiers';
 
 export type InteractiveId =
   | 'guess-device'

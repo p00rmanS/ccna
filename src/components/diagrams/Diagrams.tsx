@@ -1507,6 +1507,34 @@ function AiOpsLoop() {
   );
 }
 
+function NetworkTiers() {
+  return (
+    <Svg viewBox="0 0 720 300" title="Two-tier, three-tier and spine-leaf designs" desc="A three-tier campus has access, distribution and core layers. A two-tier design collapses distribution and core into one layer. A spine-leaf data centre connects every leaf switch to every spine switch, and leaves never connect to each other.">
+      <text className="d-title" x={20} y={20}>Three-tier</text>
+      <Node x={20} y={30} w={150} h={34} label="Core" kind="mid" />
+      <Node x={20} y={76} w={150} h={34} label="Distribution" kind="warn" />
+      <Node x={20} y={122} w={150} h={34} label="Access" kind="end" />
+      <text className="d-title" x={250} y={20}>Two-tier (collapsed core)</text>
+      <Node x={250} y={30} w={150} h={34} label="Core + Distribution" kind="mid" />
+      <Node x={250} y={122} w={150} h={34} label="Access" kind="end" />
+      <Link x1={325} y1={64} x2={325} y2={122} />
+      <text className="d-title" x={470} y={20}>Spine-leaf</text>
+      <Node x={470} y={30} w={100} h={34} label="Spine 1" kind="mid" />
+      <Node x={600} y={30} w={100} h={34} label="Spine 2" kind="mid" />
+      <Node x={470} y={122} w={100} h={34} label="Leaf 1" kind="end" />
+      <Node x={600} y={122} w={100} h={34} label="Leaf 2" kind="end" />
+      <Link x1={520} y1={64} x2={520} y2={122} />
+      <Link x1={520} y1={64} x2={650} y2={122} />
+      <Link x1={650} y1={64} x2={520} y2={122} />
+      <Link x1={650} y1={64} x2={650} y2={122} />
+      <text className="d-sub" x={20} y={200}>Campus: access = users · distribution = policy/routing · core = mabilis na backbone</text>
+      <text className="d-sub" x={20} y={224}>Two-tier: maliit na campus, pinagsama ang core at distribution</text>
+      <text className="d-sub" x={20} y={248}>Spine-leaf: data center · bawat leaf sa bawat spine · pareho ang hops (east-west)</text>
+      <text className="d-sub" x={20} y={272}>Walang leaf-sa-leaf at walang spine-sa-spine na link</text>
+    </Svg>
+  );
+}
+
 function WlanChannels() {
   return (
     <Svg viewBox="0 0 720 260" title="2.4 GHz non-overlapping channels and band comparison" desc="In the 2.4 GHz band, channels 1, 6 and 11 do not overlap. The 2.4 GHz band has longer range but more interference; 5 GHz is faster and cleaner with shorter range.">
@@ -1605,6 +1633,7 @@ const DIAGRAMS: Record<DiagramId, () => ReactNode> = {
   'iac-flow': IacFlow,
   'virt-stack': VirtStack,
   'ai-ops-loop': AiOpsLoop,
+  'network-tiers': NetworkTiers,
 };
 
 export function DiagramView({ id, caption }: { id: DiagramId; caption: string }) {
