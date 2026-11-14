@@ -77,7 +77,8 @@ export type DiagramId =
   | 'iac-flow'
   | 'virt-stack'
   | 'ai-ops-loop'
-  | 'network-tiers';
+  | 'network-tiers'
+  | 'troubleshoot-ladder';
 
 export type InteractiveId =
   | 'guess-device'

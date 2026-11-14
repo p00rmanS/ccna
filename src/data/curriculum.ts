@@ -55,7 +55,7 @@ export const CURRICULUM: PhaseOutline[] = [
     title: 'Phase 2 — Network Access',
     blurb: 'Switching, VLANs, trunks, spanning tree, EtherChannel and wireless. About 20% of the exam.',
     modules: [
-      { id: '2.1', title: 'Basic Switch Configuration', domain: 'D2', lessonIds: [], topics: ['Hostname, passwords, console, VTY', 'Management IP and gateway'] },
+      { id: '2.1', title: 'Basic Switch Configuration', domain: 'D2', lessonIds: ['basic-switch-config'], topics: ['Hostname, passwords, console, VTY', 'Management IP and gateway'] },
       { id: '2.2', title: 'VLAN Fundamentals', domain: 'D2', lessonIds: ['vlans'], topics: ['Access ports', 'Broadcast domains', 'show vlan brief'] },
       { id: '2.3', title: 'VLAN Lab', domain: 'D2', lessonIds: [], topics: ['Prove VLAN separation'] },
       { id: '2.4', title: 'Trunking', domain: 'D2', lessonIds: ['trunking', 'vlan-trunk-deep-dive'], topics: ['802.1Q', 'Native VLAN', 'Allowed VLANs'] },
@@ -80,7 +80,7 @@ export const CURRICULUM: PhaseOutline[] = [
     modules: [
       { id: '3.1', title: 'What a Router Actually Does', domain: 'D3', lessonIds: ['router-forwarding'], topics: ['The eight-step forwarding process'] },
       { id: '3.2', title: 'The Routing Table', domain: 'D3', lessonIds: ['routing-table'], topics: ['Route codes', 'Metric and administrative distance'] },
-      { id: '3.3', title: 'Longest Prefix Match', domain: 'D3', lessonIds: [], topics: ['Interactive route-selection exercises'] },
+      { id: '3.3', title: 'Longest Prefix Match', domain: 'D3', lessonIds: ['longest-prefix-match'], topics: ['Interactive route-selection exercises'] },
       { id: '3.4', title: 'IPv4 Static Routes', domain: 'D3', lessonIds: ['static-routes'], topics: ['Next-hop, exit-interface, fully specified'] },
       { id: '3.5', title: 'Default Routes', domain: 'D3', lessonIds: ['default-routes'], topics: ['Gateway of last resort'] },
       { id: '3.6', title: 'Floating Static Routes', domain: 'D3', lessonIds: [], topics: ['Backup paths via administrative distance'] },
@@ -152,8 +152,8 @@ export const CURRICULUM: PhaseOutline[] = [
     title: 'Phases 7–9 — Troubleshooting, Labs and Exam Practice',
     blurb: 'Method-driven troubleshooting, the lab track, timed practice exams and the final review.',
     modules: [
-      { id: '7.1', title: 'Troubleshooting Method and Toolbox', domain: 'practice', lessonIds: [], topics: ['Eight-step method', 'Every show command: normal vs broken output'] },
-      { id: '7.2', title: 'Troubleshooting Scenarios', domain: 'practice', lessonIds: [], topics: ['Gateway unreachable', 'VLANs cannot talk', 'OSPF neighbour missing', 'DHCP failing'] },
+      { id: '7.1', title: 'Troubleshooting Method and Toolbox', domain: 'practice', lessonIds: ['troubleshooting-method'], topics: ['Eight-step method', 'Every show command: normal vs broken output'] },
+      { id: '7.2', title: 'Troubleshooting Scenarios', domain: 'practice', lessonIds: ['troubleshooting-scenarios'], topics: ['Gateway unreachable', 'VLANs cannot talk', 'OSPF neighbour missing', 'DHCP failing'] },
       { id: '8.1', title: 'Hands-On Lab Track and Capstone', domain: 'practice', lessonIds: [], topics: ['Six lab levels', 'Pacific Tech Solutions capstone'] },
       { id: '9.1', title: 'Exam Simulator and 7-Day Review', domain: 'practice', lessonIds: [], topics: ['Timed exams', 'Domain analytics', 'Weak-topic exams', 'Exam-day checklist'] },
     ],

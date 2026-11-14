@@ -1535,6 +1535,25 @@ function NetworkTiers() {
   );
 }
 
+function TroubleshootLadder() {
+  const L = [['Application', 'DNS, web, app', 'end'], ['Transport', 'ports, ACL, NAT', 'warn'], ['Network', 'IP, mask, gateway, routing', 'mid'], ['Data link', 'VLAN, trunk, STP, MAC', 'warn'], ['Physical', 'cable, port, power, duplex', 'danger']] as const;
+  return (
+    <Svg viewBox="0 0 720 300" title="Layered troubleshooting" desc="Troubleshooting follows the layers. Bottom-up starts at the physical layer and moves up. Top-down starts at the application. Divide and conquer starts at the layer you suspect, usually the network layer with a ping, then moves up or down depending on the result.">
+      {L.map(([n, sub, kind], i) => (
+        <Node key={n} x={20} y={10 + i * 52} w={330} h={44} label={n} sub={sub} kind={kind} />
+      ))}
+      <text className="d-sub" x={380} y={40}>Bottom-up: Physical → Application</text>
+      <text className="d-sub" x={380} y={64}>Gamitin kapag hindi mo alam ang sanhi</text>
+      <text className="d-sub" x={380} y={110}>Top-down: Application → Physical</text>
+      <text className="d-sub" x={380} y={134}>Gamitin kapag isang app lang ang may problema</text>
+      <text className="d-sub" x={380} y={180}>Divide and conquer: magsimula sa Network (ping)</text>
+      <text className="d-sub" x={380} y={204}>Gumagana? hanapin pataas. Hindi? hanapin pababa.</text>
+      <text className="d-sub" x={380} y={250}>Ping IP ✔ pero pangalan ✘ = DNS</text>
+      <text className="d-sub" x={380} y={274}>Ping gateway ✘ = tingnan ang Layer 1-2 at subnet</text>
+    </Svg>
+  );
+}
+
 function WlanChannels() {
   return (
     <Svg viewBox="0 0 720 260" title="2.4 GHz non-overlapping channels and band comparison" desc="In the 2.4 GHz band, channels 1, 6 and 11 do not overlap. The 2.4 GHz band has longer range but more interference; 5 GHz is faster and cleaner with shorter range.">
@@ -1634,6 +1653,7 @@ const DIAGRAMS: Record<DiagramId, () => ReactNode> = {
   'virt-stack': VirtStack,
   'ai-ops-loop': AiOpsLoop,
   'network-tiers': NetworkTiers,
+  'troubleshoot-ladder': TroubleshootLadder,
 };
 
 export function DiagramView({ id, caption }: { id: DiagramId; caption: string }) {
